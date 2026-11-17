@@ -25,3 +25,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Test output
+tests/e2e/results/
+log.html
+report.html
+output.xml
