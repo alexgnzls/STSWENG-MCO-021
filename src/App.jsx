@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { cx } from './lib/utils';
 import LoginPage from './pages/LoginPage';
 import SupportPage from './pages/SupportPage';
 import PayrollPage from './pages/PayrollPage';
+import { supabase } from './lib/supabase';
 
 // Shared SVG icons for the shell layout
 const Icons = {
@@ -36,16 +37,39 @@ const NAV = [
 ];
 
 export default function App() {
+  const [session, setSession] = useState(null);
   const [user, setUser] = useState(null);
   const [route, setRoute] = useState('support');
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const HandleLogin = async () => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user?.user_metadata?.employee_name);
+    });
+  };
+  const HandleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) return;
+    setSession(null);
+    setUser(null);
+  };
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user?.user_metadata?.employee_name);
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((e, s) => {
+      setSession(s);
+      setUser(s?.user?.user_metadata?.employee_name);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
-  if (!user) {
-    return <LoginPage onLogin={setUser} />;
+  if (!session) {
+    return <LoginPage onLogin={HandleLogin} />;
   }
 
   const page = NAV.find((n) => n.id === route);
-
   return (
       <div className="flex min-h-screen bg-gray-100">
         {/* Sidebar */}
@@ -91,7 +115,7 @@ export default function App() {
                   <p className="mt-0.5 text-xs text-cream/40">Last login: Today, 08:30 AM</p>
                 </div>
                 <button
-                    onClick={() => setUser(null)}
+                    onClick={HandleLogout}
                     className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-cream/80 transition-colors hover:bg-red-500/10 hover:text-red-400"
                 >
               <span className="text-red-400/80">
@@ -130,7 +154,7 @@ export default function App() {
                   <span className="text-xs font-medium text-ink/70">Administrator</span>
                 </div>
                 <button
-                    onClick={() => setUser(null)}
+                    onClick={HandleLogout}
                     className="ml-3 rounded-lg border border-red-800/20 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-700 hover:bg-red-100 transition-colors"
                 >
                   Logout
