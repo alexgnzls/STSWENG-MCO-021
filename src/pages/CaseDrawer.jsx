@@ -16,7 +16,7 @@ export default function CaseDrawer({ c, onPatch, onClose }) {
     const handleAddNote = async () => {
         if (!note.trim()) return // don't add empty notes
         const { data: { user }} = await supabase.auth.getUser(); // get current user info
-        const savedNote = await addTicketNote(c.id, user.id, note.trim());
+        const savedNote = await addTicketNote(c.id, note.trim(), user.id);
 
         onPatch(c.id, {notes: [...c.notes,savedNote]})
         setNote('')
