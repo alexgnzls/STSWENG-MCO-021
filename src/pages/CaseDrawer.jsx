@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { supabase } from "../lib/supabase.js";
+import { addTicketNote } from "../lib/supportApi.js";
 import {cx, BTN, INPUT} from '../lib/utils'
 import Badge from "../components/Badge.jsx";
 
@@ -11,14 +13,12 @@ export default function CaseDrawer({ c, onPatch, onClose }) {
     const [note, setNote] = useState('')
     const [resolution, setResolution] = useState(c.resolution)
 
-    // STUBS: each would PATCH /support-cases/:id
-    /*
-        Add note: append to notes array
-        - PATCH /support-cases/:id { notes: [...c.notes, { by: 'You', at: 'Just now', text: note.trim() }] }
-     */
-    const handleAddNote = () => {
-        if (!note.trim()) return
-        onPatch(c.id, { notes: [...c.notes, { by: 'You', at: 'Just now', text: note.trim() }] })
+    const handleAddNote = async () => {
+        if (!note.trim()) return // don't add empty notes
+        const { data: { user }} = await supabase.auth.getUser(); // get current user info
+        const savedNote = await addTicketNote(c.id, user.id, note.trim());
+
+        onPatch(c.id, {notes: [...c.notes,savedNote]})
         setNote('')
     }
 

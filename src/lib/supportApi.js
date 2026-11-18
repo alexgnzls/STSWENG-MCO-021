@@ -88,3 +88,40 @@ export async function fetchCases() {
     }
     return data.map(formatRow);
 }
+
+/*
+ * This functions adds a note to the specified ticket in the database.
+ *
+ * @param {string} ticketId - The ID of the ticket to which the note will be added.
+ * @param {string} noteText - The text of the note to be added.
+ * @param {string} currentAdminId - The ID of the currently logged-in admin adding the note.
+ *
+ * @returns {Promise<Object>} - A promise that resolves to an object containing the added note's details
+ */
+export async function addTicketNote(ticketId, noteText, currentAdminId) {
+    const { data, error } = await supabase
+        .from('adm_ticket_notes')
+        .insert({
+            ticket_id: ticketId,
+            note: noteText,
+            employee_id: currentAdminId
+        })
+        .select(`
+            note_id, 
+            note,
+            creation_date,
+            author:adm_employees(employee_name)
+        `)
+        .single();
+
+    if (error) {
+        console.error('Error adding note:', error);
+    }
+
+    return {
+        id: data.note_id,
+        by: data.author?.employee_name || 'Admin',
+        at: formatDate(data.creation_date),
+        text: data.note,
+    }
+}

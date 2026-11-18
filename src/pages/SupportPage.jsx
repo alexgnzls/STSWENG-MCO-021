@@ -1,7 +1,5 @@
 import {useState, useEffect } from "react";
-import { CASES } from '../lib/mockData';
 import { fetchCases } from "../lib/supportApi.js";
-import { supabase } from "../lib/supabase.js";
 import Metric from '../components/Metric';
 import Badge from '../components/Badge';
 import {cx, TD, TH} from '../lib/utils';
@@ -40,17 +38,7 @@ export default function SupportPage() {
     }, []);
 
     const patchCase = async (id, updates) => {
-        setCases ((cases) =>
-            cases.map((caseSelected) =>
-            cases.id === id ? { ...caseSelected, ...updates } : caseSelected))
-
-        try {
-            const { data: { user } } = await supabase.auth.getUser();
-            //insert updateCase function here
-        }
-        catch (error) {
-            console.error('Failed to update case:', error.message);
-        }
+        setCases ((cases) => cases.map((caseSelected) => cases.id === id ? { ...caseSelected, ...updates } : caseSelected))
     }
 
     const shown = filter === 'All' ? cases : cases.filter((caseSelected) => caseSelected.status === filter);
