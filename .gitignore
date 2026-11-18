@@ -30,3 +30,6 @@ tests/e2e/results/
 log.html
 report.html
 output.xml
+
+# Python virtual environment (Robot tests)
+.venv/
