@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cx } from './lib/utils';
 import LoginPage from './pages/LoginPage';
 import SupportPage from './pages/SupportPage';
@@ -38,35 +38,32 @@ const NAV = [
 
 export default function App() {
   const [session, setSession] = useState(null);
-  const [user, setUser] = useState(null);
+  const [userMetadata, setUserMetadata] = useState(null);
   const [route, setRoute] = useState('support');
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const HandleLogin = async () => {
+  const SessionLogin = () => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
-      setUser(session?.user?.user_metadata?.employee_name);
+      setUserMetadata(session?.user?.user_metadata);
     });
   };
-  const HandleLogout = async () => {
+  const SessionLogout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) return;
     setSession(null);
-    setUser(null);
+    setUserMetadata(null);
   };
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    SessionLogin();
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((e, session) => {
       setSession(session);
-      setUser(session?.user?.user_metadata?.employee_name);
-    });
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((e, s) => {
-      setSession(s);
-      setUser(s?.user?.user_metadata?.employee_name);
+      setUserMetadata(session?.user?.user_metadata);
     });
     return () => subscription.unsubscribe();
   }, []);
-
+  
   if (!session) {
-    return <LoginPage onLogin={HandleLogin} />;
+    return <LoginPage onLogin={SessionLogin} />;
   }
 
   const page = NAV.find((n) => n.id === route);
@@ -110,12 +107,12 @@ export default function App() {
               {/* Sidebar Footer: User Info & Logout */}
               <div className="border-t border-cream/10 p-4">
                 <div className="mb-4 px-2">
-                  <p className="text-sm font-medium text-cream">{user}</p>
+                  <p className="text-sm font-medium text-cream">{userMetadata.employee_name}</p>
                   {/* Placeholder for time of logged in */}
                   <p className="mt-0.5 text-xs text-cream/40">Last login: Today, 08:30 AM</p>
                 </div>
                 <button
-                    onClick={HandleLogout}
+                    onClick={SessionLogout}
                     className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-cream/80 transition-colors hover:bg-red-500/10 hover:text-red-400"
                 >
               <span className="text-red-400/80">
@@ -147,14 +144,14 @@ export default function App() {
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-3 border-l border-ink/20 pl-6">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/40 text-ink font-bold ring-1 ring-ink/10">
-                  {user.charAt(0).toUpperCase()}
+                  {userMetadata.employee_name.charAt(0).toUpperCase()}
                 </div>
                 <div className="hidden flex-col md:flex">
-                  <span className="text-sm font-semibold text-ink">{user}</span>
+                  <span className="text-sm font-semibold text-ink">{userMetadata.employee_name}</span>
                   <span className="text-xs font-medium text-ink/70">Administrator</span>
                 </div>
                 <button
-                    onClick={HandleLogout}
+                    onClick={SessionLogout}
                     className="ml-3 rounded-lg border border-red-800/20 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-700 hover:bg-red-100 transition-colors"
                 >
                   Logout
