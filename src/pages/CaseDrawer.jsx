@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { supabase } from "../lib/supabase.js";
-import { addTicketNote } from "../lib/supportApi.js";
+import {addTicketNote, startTicketReview, resolveTicket, closeTicket} from "../lib/supportApi.js";
 import {cx, BTN, INPUT} from '../lib/utils'
 import Badge from "../components/Badge.jsx";
 
@@ -34,21 +34,53 @@ export default function CaseDrawer({ caseSelected, onPatch, onClose }) {
         Start review: Open -> In Review, assign to self if unassigned
         - PATCH /support-cases/:id { status: 'In Review', assignee: 'You' }
      */
-    const startReview = () => onPatch(caseSelected.id, { status: 'In Review', assignee: caseSelected.assignee === 'Unassigned' ? 'You' : caseSelected.assignee })
+    const startReview = async () => {
+        try {
+            const { data: { user }} = await supabase.auth.getUser(); // get current user info
+            await startTicketReview(caseSelected.id, user.id);
+            await onPatch(caseSelected.id, { status: 'In Review', assignee: user.email })
+        }
+        catch (error) {
+            console.error('Failed to start review:', error.message);
+        }
+    }
 
     /*
         Resolve ticket: In Review -> Resolved, requires resolution text
         - PATCH /support-cases/:id { status: 'Resolved', resolution: '...' }
      */
-    const resolveTicket = () => resolution.trim() && onPatch(caseSelected.id, { status: 'Resolved', resolution: resolution.trim() })
+    const handleResolveTicket = async () => {
+        if (!resolution.trim()) return // don't resolve without resolution text
+        try {
+            setSaving(true);
+            const { data: { user }} = await supabase.auth.getUser(); // get current user info
+            await resolveTicket(caseSelected.id, resolution.trim());
+            await onPatch(caseSelected.id, { status: 'Resolved', resolution, assignee: user.email })
+        }
+        catch (error) {
+            console.error('Failed to resolve ticket:', error.message);
+        }
+        finally {
+            setSaving(false);
+        }
+    }
 
     /*
         Close ticket: Resolved -> Closed
         - PATCH /support-cases/:id { status: 'Closed' }
      */
-    const closeTicket = () => onPatch(caseSelected.id, { status: 'Closed' })
+    const handleCloseTicket = async () => {
+        const { data: { user }} = await supabase.auth.getUser(); // get current user info
+        await closeTicket(caseSelected.id);
+        await onPatch(caseSelected.id, { status: 'Closed', assignee: user.email })
+    }
 
-    const links = [['Resident', caseSelected.resident], ['Aide', caseSelected.aide], ['Booking', caseSelected.booking], ['Property', caseSelected.property], ['Transaction', caseSelected.txn]]
+    const links = [
+        ['Resident', caseSelected.resident],
+        ['Aide', caseSelected.aide],
+        ['Booking', caseSelected.booking],
+        ['Property', caseSelected.property],
+        ['Transaction', caseSelected.txn]]
 
     return (
         <div className="fixed inset-0 z-40 flex justify-end bg-ink/40" onClick={onClose}>
@@ -105,8 +137,8 @@ export default function CaseDrawer({ caseSelected, onPatch, onClose }) {
 
                 <footer className="border-t border-ink/10 p-4">
                     {caseSelected.status === 'Open' && <button className={cx(BTN.primary, 'w-full')} onClick={startReview}>Start review</button>}
-                    {caseSelected.status === 'In Review' && <button className={cx(BTN.primary, 'w-full')} onClick={resolveTicket} disabled={!resolution.trim()}>Resolve case</button>}
-                    {caseSelected.status === 'Resolved' && <button className={cx(BTN.dark, 'w-full')} onClick={closeTicket}>Close case</button>}
+                    {caseSelected.status === 'In Review' && <button className={cx(BTN.primary, 'w-full')} onClick={handleResolveTicket} disabled={!resolution.trim()}>Resolve case</button>}
+                    {caseSelected.status === 'Resolved' && <button className={cx(BTN.dark, 'w-full')} onClick={handleCloseTicket}>Close case</button>}
                     {caseSelected.status === 'Closed' && <p className="text-center text-sm text-ink/50">This case is closed and kept in the support history.</p>}
                 </footer>
             </aside>

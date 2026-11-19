@@ -125,3 +125,64 @@ export async function addTicketNote(ticketId, noteText, currentAdminId) {
         text: data.note,
     }
 }
+
+/*
+ * This function updates the status of an open ticket to "In Review" and assigns it to the current admin.
+ * to be implemented soon: admin will be able to assign the ticket to another admin if needed
+ *
+ * @param {string} ticketId - The ID of the ticket to be updated.
+ * @param {string} adminId - The ID of the admin who will start the review.
+ */
+export async function startTicketReview(ticketId, adminId) {
+    const { data, error } = await supabase
+    .from('adm_tickets')
+    .update({
+        ticket_status: convertUI2DB['In Review'],
+        assigned_employee_id: adminId
+    })
+    .eq('ticket_id', ticketId);
+
+    if (error) {
+        console.error('Error starting ticket review:', error);
+    }
+}
+
+/*
+ * This function updates the status of a ticket to "Resolved" and adds a resolution text.
+ *
+ * @param {string} ticketId - The ID of the ticket to be resolved.
+ * @param {string} resolutionText - The text describing the resolution of the ticket.
+ */
+export async function resolveTicket(ticketId, resolutionText) {
+    const { data, error } = await supabase
+    .from('adm_tickets')
+    .update({
+        ticket_status: convertUI2DB ['Resolved'],
+        ticket_remarks: resolutionText,
+        resolve_date: new Date().toISOString(),
+    })
+    .eq('ticket_id', ticketId);
+
+    if (error) {
+        console.error('Error resolving ticket:', error);
+    }
+}
+
+/*
+ * This function updates the status of a ticket to "Closed".
+ *
+ * @param {string} ticketId - The ID of the ticket to be closed.
+ */
+export async function closeTicket(ticketId) {
+    const { data, error } = await supabase
+    .from('adm_tickets')
+    .update({
+        ticket_status: convertUI2DB ['Closed'],
+        close_date: new Date().toISOString(),
+    })
+    .eq('ticket_id', ticketId);
+
+    if (error) {
+        console.error('Error closing ticket:', error);
+    }
+}
