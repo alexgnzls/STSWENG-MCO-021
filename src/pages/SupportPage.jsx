@@ -1,7 +1,5 @@
 import {useState, useEffect } from "react";
-import { CASES } from '../lib/mockData';
 import { fetchCases } from "../lib/supportApi.js";
-import { supabase } from "../lib/supabase.js";
 import Metric from '../components/Metric';
 import Badge from '../components/Badge';
 import {cx, TD, TH} from '../lib/utils';
