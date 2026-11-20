@@ -12,14 +12,12 @@ export default function LoginPage({ onLogin }) {
         const password = String(form_contents.get('password') ?? '');
         const user_lookup = await supabase.rpc('get_employee_login_email', { username });
         // TODO: needs a user not found popup
-        console.log(user_lookup.error);
         if (user_lookup.error || !user_lookup.data) return;
         const { error } = await supabase.auth.signInWithPassword({
             email: user_lookup.data,
             password,
         });
         // TODO: needs an error popup, same as user not found but diff text
-        console.log('result: ', error);
         if (error) return;
         onLogin();
     };
