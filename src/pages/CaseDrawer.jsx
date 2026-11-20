@@ -141,13 +141,14 @@ export default function CaseDrawer({ caseSelected, onPatch, onClose }) {
         - PATCH /support-cases/:id { status: 'Resolved', resolution: '...' }
      */
     const handleResolveTicket = async () => {
-        if (!resolution.trim() || saving) return // don't resolve without resolution text
+        if (!resolution.trim() || saving) return; // don't resolve without resolution text
         setSaving(true);
         setActionError('')
         try {
-            setSaving(true);
+            const userId =  await getCurrentUserId();
+            const assignedName = await assignTicket(caseSelected.id, userId); // ensure the ticket is assigned to the current user before resolving
             await resolveTicket(caseSelected.id, resolution.trim());
-            await onPatch(caseSelected.id, { status: 'Resolved', resolution, assignee: user.email })
+            await onPatch(caseSelected.id, { status: 'Resolved', resolution, assignee: assignedName })
         }
         catch (error) {
             setActionError(error.message || 'Failed to resolve ticket.');
