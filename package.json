@@ -28,7 +28,7 @@
     "vite": "^8.3.6"
   },
   "allowScripts": {
-    "bcrypt@6.0.0": true
+    "bcrypt@6.0.0": true,
     "vite": "^8.3.6",
     "vitest": "^5.1.0"
   }
