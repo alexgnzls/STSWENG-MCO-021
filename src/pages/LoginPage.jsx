@@ -1,14 +1,26 @@
 import { useState } from 'react';
+import { supabase } from '../lib/supabase';
 
 export default function LoginPage({ onLogin }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const HandleSubmit = (e) => {
-        e.preventDefault(); //[cite: 7]
-        if (username.trim() && password.length >= 6) {
-            onLogin(username.trim());
-        }
+    const HandleSubmit = async (e) => {
+        e.preventDefault();
+        const form_contents = new FormData(e.currentTarget);
+        const user_lookup = await supabase.from('adm_employees')
+            .select('employee_email')
+            .eq('employee_username', form_contents.get('username'))
+            .single();
+        // TODO: needs a user not found popup
+        if (user_lookup.error || !user_lookup.data) return;
+        const { error } = await supabase.auth.signInWithPassword({
+            email: user_lookup.data.employee_email,
+            password: form_contents.get('password'),
+        });
+        // TODO: needs an error popup, same as user not found but diff text
+        if (error) return;
+        onLogin();
     };
 
     return (
@@ -52,6 +64,7 @@ export default function LoginPage({ onLogin }) {
                             </label>
                             <input
                                 id='username'
+                                name='username'
                                 type='text'
                                 placeholder='Enter username'
                                 value={username}
@@ -71,6 +84,7 @@ export default function LoginPage({ onLogin }) {
                             </div>
                             <input
                                 id='password'
+                                name='password'
                                 type='password'
                                 placeholder='Enter password'
                                 value={password}
