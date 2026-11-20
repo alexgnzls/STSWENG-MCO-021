@@ -3,22 +3,23 @@ import { supabase } from '../lib/supabase';
 
 export default function LoginPage({ onLogin }) {
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('');   
 
     const HandleSubmit = async (e) => {
         e.preventDefault();
         const form_contents = new FormData(e.currentTarget);
-        const user_lookup = await supabase.from('adm_employees')
-            .select('employee_email')
-            .eq('employee_username', form_contents.get('username'))
-            .single();
+        const username = String(form_contents.get('username') ?? '').trim();
+        const password = String(form_contents.get('password') ?? '');
+        const user_lookup = await supabase.rpc('get_employee_login_email', { username });
         // TODO: needs a user not found popup
+        console.log(user_lookup.error);
         if (user_lookup.error || !user_lookup.data) return;
         const { error } = await supabase.auth.signInWithPassword({
-            email: user_lookup.data.employee_email,
-            password: form_contents.get('password'),
+            email: user_lookup.data,
+            password,
         });
         // TODO: needs an error popup, same as user not found but diff text
+        console.log('result: ', error);
         if (error) return;
         onLogin();
     };
