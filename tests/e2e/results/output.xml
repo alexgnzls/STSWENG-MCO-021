@@ -1,0 +1,1155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.5.1 (Python 3.14.8 on win32)" generated="2026-11-21T22:57:39.177255" rpa="false" schemaversion="5">
+<suite id="s1" name="D01 login" source="C:\Users\jjles\OneDrive\Documents\Visual Studio (Projects)\Studying Directory\STSWENG_MANG-JUAN\STSWENG-MCO-G7\tests\e2e\suites\D01_login.robot">
+<test id="s1-t1" name="TC-D01-01: Valid credentials open the dashboard" line="7">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:39.537390" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:57:39.537145" elapsed="0.716760"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-21T22:57:40.254292" elapsed="0.023102"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:57:40.277605" elapsed="0.021680"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:57:39.536365" elapsed="0.763078"/>
+</kw>
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:40.300532" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:40.300304" elapsed="0.114661"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:40.415695" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-21T22:57:40.436553" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:40.415254" elapsed="0.095604"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:40.511529" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:40.511111" elapsed="0.052911"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-21T22:57:40.299925" elapsed="0.264228"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:57:40.564399" elapsed="0.627101"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:41.204314" level="INFO">Element 'css:aside' contains text 'Jarvis Wuckert'.</msg>
+<arg>css:aside</arg>
+<arg>${VALID_DISPLAY_NAME}</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-11-21T22:57:41.191786" elapsed="0.012636"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:41.217117" level="INFO">Element 'css:header' contains text 'Jarvis Wuckert'.</msg>
+<arg>css:header</arg>
+<arg>${VALID_DISPLAY_NAME}</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-11-21T22:57:41.204720" elapsed="0.012493"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-21T22:57:41.217598" elapsed="2.101655"/>
+</kw>
+<tag>D01</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-21T22:57:39.534746" elapsed="3.784693"/>
+</test>
+<test id="s1-t2" name="TC-D01-02: Password visibility Toggle" line="14">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:43.321758" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:57:43.321595" elapsed="0.541025"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-21T22:57:43.862855" elapsed="0.023412"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:57:43.886447" elapsed="0.011952"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:57:43.321070" elapsed="0.577437"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:43.899049" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-21T22:57:43.921371" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>SamplePass42</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:43.898801" elapsed="0.070349"/>
+</kw>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:43.976902" level="INFO">${type_default} = password</msg>
+<var>${type_default}</var>
+<arg>id:password</arg>
+<arg>type</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:43.969466" elapsed="0.007480"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${type_default}</arg>
+<arg>password</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-11-21T22:57:43.977244" elapsed="0.000388"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:43.977994" level="INFO">Clicking button 'xpath://button[@aria-label="Show password"]'.</msg>
+<msg time="2026-11-21T22:57:44.534965" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-9.png"&gt;&lt;img src="selenium-screenshot-9.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2026-11-21T22:57:44.535153" level="FAIL">Button with locator 'xpath://button[@aria-label="Show password"]' not found.</msg>
+<arg>xpath://button[@aria-label="Show password"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="FAIL" start="2026-11-21T22:57:43.977814" elapsed="0.563333">Button with locator 'xpath://button[@aria-label="Show password"]' not found.</status>
+</kw>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${type_shown}</var>
+<arg>id:password</arg>
+<arg>type</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-21T22:57:44.541505" elapsed="0.000047"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${type_shown}</arg>
+<arg>text</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2026-11-21T22:57:44.541794" elapsed="0.000035"/>
+</kw>
+<kw name="Textfield Value Should Be" owner="SeleniumLibrary">
+<arg>id:password</arg>
+<arg>SamplePass42</arg>
+<doc>Verifies text field ``locator`` has exactly text ``expected``.</doc>
+<status status="NOT RUN" start="2026-11-21T22:57:44.541988" elapsed="0.000026"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>xpath://button[@aria-label="Hide password"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-21T22:57:44.542138" elapsed="0.000023"/>
+</kw>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${type_hidden}</var>
+<arg>id:password</arg>
+<arg>type</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-21T22:57:44.542355" elapsed="0.000023"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${type_hidden}</arg>
+<arg>password</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2026-11-21T22:57:44.542523" elapsed="0.000022"/>
+</kw>
+<kw name="Textfield Value Should Be" owner="SeleniumLibrary">
+<arg>id:password</arg>
+<arg>SamplePass42</arg>
+<doc>Verifies text field ``locator`` has exactly text ``expected``.</doc>
+<status status="NOT RUN" start="2026-11-21T22:57:44.542649" elapsed="0.000020"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-21T22:57:44.542977" elapsed="2.104662"/>
+</kw>
+<tag>D01</tag>
+<tag>known-bug</tag>
+<tag>positive</tag>
+<tag>robot:skip-on-failure</tag>
+<status status="SKIP" start="2026-11-21T22:57:43.320149" elapsed="3.327824">Failed test skipped using 'robot:skip-on-failure' tag.
+
+Original failure:
+Button with locator 'xpath://button[@aria-label="Show password"]' not found.</status>
+</test>
+<test id="s1-t3" name="TC-D01-03: Keyboard Submission (Pressing ENTER)" line="28">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:46.650196" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:57:46.649951" elapsed="0.542731"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-21T22:57:47.192938" elapsed="0.017407"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:57:47.210530" elapsed="0.011326"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:57:46.649427" elapsed="0.572568"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:47.222538" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${VALID_USER}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:47.222280" elapsed="0.073059"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:47.295872" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-21T22:57:47.313833" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${VALID_PASS}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:47.295624" elapsed="0.067390"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:47.363600" level="INFO">Sending key(s) ('RETURN',) to id:password element.</msg>
+<msg time="2026-11-21T22:57:47.904320" level="INFO">Pressing special key RETURN to element.</msg>
+<msg time="2026-11-21T22:57:47.904417" level="INFO">Releasing special key RETURN.</msg>
+<arg>id:password</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-11-21T22:57:47.363331" elapsed="0.548323"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:57:47.911996" elapsed="0.631435"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:48.546931" level="INFO">Current page does not contain element 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:57:48.543723" elapsed="0.003279"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-21T22:57:48.547255" elapsed="2.104476"/>
+</kw>
+<tag>D01</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-21T22:57:46.648722" elapsed="4.003501"/>
+</test>
+<test id="s1-t4" name="TC-D01-04: Unregistered Account" line="36">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:50.654579" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:57:50.654411" elapsed="0.538813"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-21T22:57:51.193511" elapsed="0.022022"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:57:51.215708" elapsed="0.011717"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:57:50.654063" elapsed="0.573470"/>
+</kw>
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:51.228367" level="INFO">Typing text 'qa.unregistered.021' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:51.228174" elapsed="0.078225"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:51.306820" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-21T22:57:51.322760" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:51.306584" elapsed="0.051786"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:51.358728" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:51.358532" elapsed="0.042049"/>
+</kw>
+<arg>${UNKNOWN_USER}</arg>
+<arg>SamplePass42</arg>
+<status status="PASS" start="2026-11-21T22:57:51.227860" elapsed="0.172825"/>
+</kw>
+<kw name="Login Should Be Refused" owner="common">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-11-21T22:57:52.402507" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses execution for the given time.</doc>
+<status status="PASS" start="2026-11-21T22:57:51.401476" elapsed="1.001159"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:52.411207" level="INFO">Element 'css:button[type="submit"]' is displayed.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:57:52.402812" elapsed="0.008477"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:52.417477" level="INFO">Current page contains text 'Sign in (Admin)'.</msg>
+<arg>Sign in (Admin)</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:57:52.411454" elapsed="0.006103"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:52.423664" level="INFO">Current page does not contain element 'css:header h1'.</msg>
+<arg>css:header h1</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:57:52.417685" elapsed="0.006072"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:57:51.401109" elapsed="1.022734"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-21T22:57:52.424123" elapsed="2.117427"/>
+</kw>
+<tag>D01</tag>
+<tag>negative</tag>
+<status status="PASS" start="2026-11-21T22:57:50.653607" elapsed="3.888404"/>
+</test>
+<test id="s1-t5" name="TC-D01-05: Empty username and password are refused" line="41">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:54.543689" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:57:54.543536" elapsed="0.539502"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-21T22:57:55.083229" elapsed="0.028126"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:57:55.111567" elapsed="0.011240"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:57:54.543215" elapsed="0.579700"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:55.123442" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:55.123202" elapsed="0.046965"/>
+</kw>
+<kw name="Login Should Be Refused" owner="common">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-11-21T22:57:56.171295" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses execution for the given time.</doc>
+<status status="PASS" start="2026-11-21T22:57:55.170746" elapsed="1.000663"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:56.180430" level="INFO">Element 'css:button[type="submit"]' is displayed.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:57:56.171582" elapsed="0.008941"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:56.187560" level="INFO">Current page contains text 'Sign in (Admin)'.</msg>
+<arg>Sign in (Admin)</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:57:56.180672" elapsed="0.006974"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:56.192834" level="INFO">Current page does not contain element 'css:header h1'.</msg>
+<arg>css:header h1</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:57:56.187787" elapsed="0.005143"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:57:55.170494" elapsed="1.022525"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-21T22:57:56.193308" elapsed="2.098702"/>
+</kw>
+<tag>D01</tag>
+<tag>negative</tag>
+<status status="PASS" start="2026-11-21T22:57:54.542726" elapsed="3.749576"/>
+</test>
+<test id="s1-t6" name="TC-D01-06: Case Sensitivity" line="46">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:58.294164" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:57:58.293935" elapsed="0.541284"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-21T22:57:58.835404" elapsed="0.021381"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:57:58.856963" elapsed="0.011661"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:57:58.293459" elapsed="0.575273"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-11-21T22:57:58.869526" level="INFO">${first_char} = J</msg>
+<var>${first_char}</var>
+<arg>"${VALID_PASS}"[0].swapcase()</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-11-21T22:57:58.869027" elapsed="0.000529"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-21T22:57:58.870171" level="INFO">${altered_pass} = JarvisWUCKERT.support</msg>
+<var>${altered_pass}</var>
+<arg>${first_char}${VALID_PASS}[1:]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-21T22:57:58.869807" elapsed="0.000390"/>
+</kw>
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:58.870823" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:58.870641" elapsed="0.072273"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:58.943344" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-21T22:57:58.959620" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:58.943099" elapsed="0.064058"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:57:59.007519" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:57:59.007320" elapsed="0.041407"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${altered_pass}</arg>
+<status status="PASS" start="2026-11-21T22:57:58.870394" elapsed="0.178445"/>
+</kw>
+<kw name="Login Should Be Refused" owner="common">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-11-21T22:58:00.050070" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses execution for the given time.</doc>
+<status status="PASS" start="2026-11-21T22:57:59.049427" elapsed="1.000806"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:00.058982" level="INFO">Element 'css:button[type="submit"]' is displayed.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:58:00.050465" elapsed="0.008631"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:00.066049" level="INFO">Current page contains text 'Sign in (Admin)'.</msg>
+<arg>Sign in (Admin)</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:58:00.059241" elapsed="0.006901"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:00.077590" level="INFO">Current page does not contain element 'css:header h1'.</msg>
+<arg>css:header h1</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:58:00.066302" elapsed="0.011377"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:57:59.049168" elapsed="1.028595"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-21T22:58:00.078058" elapsed="2.101306"/>
+</kw>
+<tag>D01</tag>
+<tag>negative</tag>
+<status status="PASS" start="2026-11-21T22:57:58.292961" elapsed="3.886665"/>
+</test>
+<test id="s1-t7" name="TC-D01-07: Leading And Trailing Spaces" line="54">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:02.181372" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:58:02.181180" elapsed="0.647111"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-21T22:58:02.828560" elapsed="0.028731"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:58:02.857475" elapsed="0.011985"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:02.180796" elapsed="0.688772"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-21T22:58:02.870250" level="INFO">${spaces_only} =    </msg>
+<var>${spaces_only}</var>
+<arg>${SPACE}${SPACE}${SPACE}</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-21T22:58:02.869885" elapsed="0.000393"/>
+</kw>
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:02.870998" level="INFO">Typing text '   ' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:02.870812" elapsed="0.057366"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:02.928623" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-21T22:58:02.945468" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:02.928363" elapsed="0.069226"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:02.997994" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:02.997776" elapsed="0.041442"/>
+</kw>
+<arg>${spaces_only}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-21T22:58:02.870542" elapsed="0.168779"/>
+</kw>
+<kw name="Login Should Be Refused" owner="common">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-11-21T22:58:04.040176" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses execution for the given time.</doc>
+<status status="PASS" start="2026-11-21T22:58:03.039844" elapsed="1.000446"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:04.049226" level="INFO">Element 'css:button[type="submit"]' is displayed.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:58:04.040452" elapsed="0.008949"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:04.056903" level="INFO">Current page contains text 'Sign in (Admin)'.</msg>
+<arg>Sign in (Admin)</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:58:04.049561" elapsed="0.007435"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:04.061975" level="INFO">Current page does not contain element 'css:header h1'.</msg>
+<arg>css:header h1</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:58:04.057159" elapsed="0.004916"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:03.039600" elapsed="1.022580"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-21T22:58:04.062512" elapsed="2.107157"/>
+</kw>
+<tag>D01</tag>
+<tag>negative</tag>
+<status status="PASS" start="2026-11-21T22:58:02.180307" elapsed="3.989592"/>
+</test>
+<test id="s1-t8" name="TC-D01-08: Sign out returns to an empty login form" line="60">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:06.171641" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:58:06.171366" elapsed="0.600922"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-21T22:58:06.772494" elapsed="0.026865"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:58:06.799553" elapsed="0.011952"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:06.170994" elapsed="0.640620"/>
+</kw>
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:06.812678" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:06.812480" elapsed="0.081602"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:06.894638" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-21T22:58:06.913457" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:06.894284" elapsed="0.076956"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:06.971797" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:06.971425" elapsed="0.051706"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-21T22:58:06.812220" elapsed="0.211019"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:58:07.023369" elapsed="0.637865"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:06.811945" elapsed="0.849398"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:07.661793" level="INFO">Clicking button 'xpath://aside//button[normalize-space()="Sign out"]'.</msg>
+<arg>xpath://aside//button[normalize-space()="Sign out"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:07.661573" elapsed="0.050366"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Sign in (Admin)</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:58:07.712225" elapsed="0.213845"/>
+</kw>
+<kw name="Textfield Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:07.941136" level="INFO">Content of text field 'id:username' is ''.</msg>
+<arg>id:username</arg>
+<arg>${EMPTY}</arg>
+<doc>Verifies text field ``locator`` has exactly text ``expected``.</doc>
+<status status="PASS" start="2026-11-21T22:58:07.926328" elapsed="0.014924"/>
+</kw>
+<kw name="Textfield Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:07.954962" level="INFO">Content of text field 'id:password' is ''.</msg>
+<arg>id:password</arg>
+<arg>${EMPTY}</arg>
+<doc>Verifies text field ``locator`` has exactly text ``expected``.</doc>
+<status status="PASS" start="2026-11-21T22:58:07.941609" elapsed="0.013466"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-21T22:58:07.955470" elapsed="2.104787"/>
+</kw>
+<tag>D01</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-21T22:58:06.170420" elapsed="3.890233"/>
+</test>
+<test id="s1-t9" name="TC-D01-09: Reloading after sign out stays on the login page" line="68">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:10.063390" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:58:10.063061" elapsed="0.543549"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-21T22:58:10.606816" elapsed="0.019207"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:58:10.626198" elapsed="0.011440"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:10.062368" elapsed="0.575375"/>
+</kw>
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:10.638736" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:10.638541" elapsed="0.075224"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:10.714185" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-21T22:58:10.729886" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:10.713947" elapsed="0.070242"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:10.784741" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:10.784431" elapsed="0.044232"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-21T22:58:10.638302" elapsed="0.190478"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:58:10.828913" elapsed="0.832591"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:10.638018" elapsed="1.023592"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:11.662095" level="INFO">Clicking button 'xpath://aside//button[normalize-space()="Sign out"]'.</msg>
+<arg>xpath://aside//button[normalize-space()="Sign out"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:11.661838" elapsed="0.056217"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Sign in (Admin)</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:58:11.718368" elapsed="0.210523"/>
+</kw>
+<kw name="Reload Page" owner="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" start="2026-11-21T22:58:11.929142" elapsed="0.057884"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:11.998333" level="INFO">Current page contains text 'Sign in (Admin)'.</msg>
+<arg>Sign in (Admin)</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:58:11.987338" elapsed="0.011145"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:12.005499" level="INFO">Current page does not contain element 'css:header h1'.</msg>
+<arg>css:header h1</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:58:11.998906" elapsed="0.006770"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-21T22:58:12.006238" elapsed="2.216791"/>
+</kw>
+<tag>D01</tag>
+<tag>negative</tag>
+<tag>security</tag>
+<status status="PASS" start="2026-11-21T22:58:10.061590" elapsed="4.161795"/>
+</test>
+<test id="s1-t10" name="TC-D01-10: Wrong password is refused" line="77">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:14.226205" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:58:14.225892" elapsed="0.569696"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-21T22:58:14.795789" elapsed="0.023379"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:58:14.819374" elapsed="0.011763"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:14.225211" elapsed="0.606061"/>
+</kw>
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:14.832117" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:14.831925" elapsed="0.078548"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:14.910882" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-21T22:58:14.927034" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:14.910653" elapsed="0.053347"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:14.964400" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:14.964186" elapsed="0.039747"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${WRONG_PASS}</arg>
+<status status="PASS" start="2026-11-21T22:58:14.831614" elapsed="0.172425"/>
+</kw>
+<kw name="Login Should Be Refused" owner="common">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-11-21T22:58:16.005193" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses execution for the given time.</doc>
+<status status="PASS" start="2026-11-21T22:58:15.004623" elapsed="1.000764"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:16.017474" level="INFO">Element 'css:button[type="submit"]' is displayed.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:58:16.005702" elapsed="0.011860"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:16.024531" level="INFO">Current page contains text 'Sign in (Admin)'.</msg>
+<arg>Sign in (Admin)</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:58:16.017711" elapsed="0.006911"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:16.029974" level="INFO">Current page does not contain element 'css:header h1'.</msg>
+<arg>css:header h1</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:58:16.024764" elapsed="0.005302"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:15.004373" elapsed="1.025773"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-21T22:58:16.030522" elapsed="2.101413"/>
+</kw>
+<tag>D01</tag>
+<tag>negative</tag>
+<tag>security</tag>
+<status status="PASS" start="2026-11-21T22:58:14.224354" elapsed="3.907967"/>
+</test>
+<test id="s1-t11" name="TC-D01-11: Browser Back cannot restore dashboard access after sign-out" line="82">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:18.143638" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:58:18.143464" elapsed="0.533107"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-21T22:58:18.676756" elapsed="0.022873"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:58:18.699803" elapsed="0.011587"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:18.133881" elapsed="0.577614"/>
+</kw>
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:18.712464" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:18.712279" elapsed="0.072835"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:18.785522" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-21T22:58:18.801897" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:18.785289" elapsed="0.066355"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:18.852015" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:18.851816" elapsed="0.041138"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-21T22:58:18.712056" elapsed="0.181002"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:58:18.893185" elapsed="0.421836"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:18.711808" elapsed="0.603343"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:19.315635" level="INFO">Opening url 'about:blank'</msg>
+<arg>about:blank</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:58:19.315468" elapsed="0.085948"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:19.401950" level="INFO">Opening url 'http://localhost:5173'</msg>
+<arg>${BASE_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:58:19.401741" elapsed="0.147304"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:58:19.549347" elapsed="0.038494"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:19.588329" level="INFO">Clicking button 'xpath://aside//button[normalize-space()="Sign out"]'.</msg>
+<arg>xpath://aside//button[normalize-space()="Sign out"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:19.588104" elapsed="0.050288"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Sign in (Admin)</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:58:19.638730" elapsed="0.210811"/>
+</kw>
+<kw name="Go Back" owner="SeleniumLibrary">
+<doc>Simulates the user clicking the back button on their browser.</doc>
+<status status="PASS" start="2026-11-21T22:58:19.849827" elapsed="0.018209"/>
+</kw>
+<kw name="Go Back" owner="SeleniumLibrary">
+<doc>Simulates the user clicking the back button on their browser.</doc>
+<status status="PASS" start="2026-11-21T22:58:19.868335" elapsed="0.026138"/>
+</kw>
+<kw name="Wait Until Location Contains" owner="SeleniumLibrary">
+<arg>${BASE_URL}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-11-21T22:58:19.895124" elapsed="0.003697"/>
+</kw>
+<kw name="Login Should Be Refused" owner="common">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-11-21T22:58:20.900172" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses execution for the given time.</doc>
+<status status="PASS" start="2026-11-21T22:58:19.899377" elapsed="1.001021"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:20.913630" level="INFO">Element 'css:button[type="submit"]' is displayed.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:58:20.900681" elapsed="0.013041"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:20.918576" level="INFO">Current page contains text 'Sign in (Admin)'.</msg>
+<arg>Sign in (Admin)</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:58:20.913876" elapsed="0.004780"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:20.921702" level="INFO">Current page does not contain element 'css:header h1'.</msg>
+<arg>css:header h1</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:58:20.918787" elapsed="0.002987"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:19.899134" elapsed="1.022714"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-21T22:58:20.922094" elapsed="2.124355"/>
+</kw>
+<tag>D01</tag>
+<tag>negative</tag>
+<status status="PASS" start="2026-11-21T22:58:18.133114" elapsed="4.913964"/>
+</test>
+<test id="s1-t12" name="TC-D01-14: Signing out in one tab signs the admin out in another tab" line="95">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:23.049723" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-21T22:58:23.049572" elapsed="0.531549"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-21T22:58:23.581306" elapsed="0.028877"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-21T22:58:23.610362" elapsed="0.012076"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:23.049268" elapsed="0.573280"/>
+</kw>
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:23.623607" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:23.623419" elapsed="0.080802"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:23.704660" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-21T22:58:23.722153" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:23.704417" elapsed="0.076563"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:23.781508" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:23.781219" elapsed="0.049267"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-21T22:58:23.623184" elapsed="0.207451"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:58:23.830846" elapsed="0.438756"/>
+</kw>
+<status status="PASS" start="2026-11-21T22:58:23.622875" elapsed="0.646838"/>
+</kw>
+<kw name="Get Window Handles" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:24.271793" level="INFO">${tab_a} = ['3D34C804BD9617BC87E2FFABE125810D']</msg>
+<var>${tab_a}</var>
+<doc>Returns all child window handles of the selected browser as a list.</doc>
+<status status="PASS" start="2026-11-21T22:58:24.269996" elapsed="0.001853"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:24.272406" level="INFO">Executing JavaScript:
+window.open('http://localhost:5173', '_blank');
+Without any arguments.</msg>
+<arg>window.open('${BASE_URL}', '_blank');</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2026-11-21T22:58:24.272190" elapsed="0.035890"/>
+</kw>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>NEW</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:24.308658" elapsed="0.021736"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-21T22:58:24.331162" elapsed="0.075392"/>
+</kw>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${tab_a}[0]</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:24.407004" elapsed="0.013419"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:24.421476" level="INFO">Clicking button 'xpath://aside//button[normalize-space()="Sign out"]'.</msg>
+<arg>xpath://aside//button[normalize-space()="Sign out"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:24.420997" elapsed="0.076067"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Sign in (Admin)</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:58:24.497350" elapsed="0.213771"/>
+</kw>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>NEW</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="PASS" start="2026-11-21T22:58:24.711719" elapsed="0.009516"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Sign in (Admin)</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:58:24.721570" elapsed="0.008686"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-21T22:58:24.734811" level="INFO">Current page does not contain element 'css:header h1'.</msg>
+<arg>css:header h1</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2026-11-21T22:58:24.730620" elapsed="0.004293"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-21T22:58:24.735264" elapsed="2.118467"/>
+</kw>
+<tag>D01</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-21T22:58:23.048384" elapsed="3.805849"/>
+</test>
+<status status="PASS" start="2026-11-21T22:57:39.178732" elapsed="47.676647"/>
+</suite>
+<statistics>
+<total>
+<stat pass="11" fail="0" skip="1">All Tests</stat>
+</total>
+<tag>
+<stat pass="11" fail="0" skip="1">D01</stat>
+<stat pass="0" fail="0" skip="1">known-bug</stat>
+<stat pass="7" fail="0" skip="0">negative</stat>
+<stat pass="4" fail="0" skip="1">positive</stat>
+<stat pass="2" fail="0" skip="0">security</stat>
+</tag>
+<suite>
+<stat name="D01 login" id="s1" pass="11" fail="0" skip="1">D01 login</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
