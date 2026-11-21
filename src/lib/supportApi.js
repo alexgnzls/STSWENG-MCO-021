@@ -23,10 +23,11 @@ const convertDB2UI = {
  */
 const formatDate = (date) => {
     if (!date) return 'N/A';
-    new Date(date).toLocaleString('en-US', {
+    return new Date(date).toLocaleString('en-US', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
+        hour: '2-digit',
         minute: '2-digit',
     });
 };
@@ -70,21 +71,22 @@ export async function fetchCases() {
         .from('adm_tickets')
         .select(`
             *,
-            assigned_employee:adm_employees(employee_id, employee_name),
+            assigned_employee:adm_employees!adm_tickets_assigned_employee_id_fkey(employee_id, employee_name),
             resident:usr_residents(*),
-            aide:aides(*),
+            aide:aide_aides(*),
             booking:usr_bookings(*),
             notes:adm_ticket_notes(
                 note_id,
                 note,
                 creation_date,
-                author:adm_employees(employee_name)
+                author:adm_employees!adm_ticket_notes_employee_id_fkey(employee_name)
             )
         `)
         .order('receive_date', { ascending: false })
         .order('creation_date', { referencedTable: 'notes', ascending: true });
     if (error) {
         console.error('Error fetching cases:', error);
+        throw error;
     }
     return data.map(formatRow);
 }
@@ -116,6 +118,7 @@ export async function addTicketNote(ticketId, noteText, currentAdminId) {
 
     if (error) {
         console.error('Error adding note:', error);
+        throw error;
     }
 
     return {
@@ -144,6 +147,7 @@ export async function startTicketReview(ticketId, adminId) {
 
     if (error) {
         console.error('Error starting ticket review:', error);
+        throw error;
     }
 }
 
@@ -165,6 +169,7 @@ export async function resolveTicket(ticketId, resolutionText) {
 
     if (error) {
         console.error('Error resolving ticket:', error);
+        throw error;
     }
 }
 
@@ -184,5 +189,59 @@ export async function closeTicket(ticketId) {
 
     if (error) {
         console.error('Error closing ticket:', error);
+        throw error;
     }
+}
+
+/*
+ * This function fetches all active employees from the database, which will be used for assigning tickets.
+ */
+export async function fetchActiveEmployees() {
+    const { data, error } = await supabase
+        .from('adm_employees')
+        .select('employee_id, employee_name')
+        .eq('is_active', true)
+        .order('employee_name', { ascending: true });
+
+    if (error) {
+        console.error('Error fetching active employees:', error);
+        throw error;
+    }
+
+    return data || [];
+}
+
+/*
+ * This function assigns a ticket to a specific employee
+ *
+ * @param {string} ticketId - The ID of the ticket to be assigned.
+ * @param {string} employeeId - The ID of the employee to whom the ticket will be assigned.
+ */
+export async function assignTicket(ticketId, employeeId) {
+    const { data: employee, error: lookUpError } = await supabase
+        .from('adm_employees')
+        .select('employee_id, employee_name')
+        .eq('employee_id', employeeId)
+        .eq('is_active', true)
+        .single();
+
+    // Check if the employee exists and is active
+    if (lookUpError || !employee) {
+        throw new Error('Employee does not exist in the database or inactive');
+    }
+
+    // Update the ticket's assigned employee in the database
+    const { error: updateError } = await supabase
+        .from('adm_tickets')
+        .update({
+            assigned_employee_id: employeeId
+        })
+        .eq('ticket_id', ticketId);
+
+    if (updateError) {
+        console.error('Error assigning ticket:', updateError);
+        throw updateError;
+    }
+
+    return employee
 }

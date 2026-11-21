@@ -4,6 +4,7 @@ import Metric from '../components/Metric';
 import Badge from '../components/Badge';
 import {cx, TD, TH} from '../lib/utils';
 import CaseDrawer from "./CaseDrawer.jsx";
+import {supabase} from "../lib/supabase.js";
 
 export default function SupportPage() {
     const [cases, setCases] = useState([])
@@ -34,10 +35,21 @@ export default function SupportPage() {
         }
 
         loadCases();
-        return () => { isMounted = false }; // Cleanup function to set isMounted to false on unmount
+
+        const channel = supabase
+            .channel('support-ticket-real-time')
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'adm_tickets' }, loadCases)
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'adm_ticket_notes' }, loadCases)
+            .subscribe();
+
+        return () => {
+            isMounted = false
+            supabase.removeChannel(channel);
+        };
     }, []);
 
-    const patchCase = async (id, updates) => {
+    //Update a case in the state when changes are made in the CaseDrawer
+    const patchCase = (id, updates) => {
         setCases ((cases) => cases.map((caseSelected) => cases.id === id ? { ...caseSelected, ...updates } : caseSelected))
     }
 
