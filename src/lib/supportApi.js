@@ -71,7 +71,7 @@ export async function fetchCases() {
         .from('adm_tickets')
         .select(`
             *,
-            assigned_employee:adm_employees(employee_id, employee_name),
+            assigned_employee:adm_employees!adm_tickets_assigned_employee_id_fkey(employee_id, employee_name),
             resident:usr_residents(*),
             aide:aide_aides(*),
             booking:usr_bookings(*),
@@ -79,7 +79,7 @@ export async function fetchCases() {
                 note_id,
                 note,
                 creation_date,
-                author:adm_employees(employee_name)
+                author:adm_employees!adm_ticket_notes_employee_id_fkey(employee_name)
             )
         `)
         .order('receive_date', { ascending: false })
