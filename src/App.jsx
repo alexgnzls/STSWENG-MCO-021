@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import SupportPage from './pages/SupportPage';
 import PayrollPage from './pages/PayrollPage';
 import { supabase } from './lib/supabase';
+import logo from './assets/invertedLogo.svg';
 
 // Shared SVG icons for the shell layout
 const Icons = {
@@ -74,9 +75,9 @@ export default function App() {
             <aside className="sticky top-0 flex h-screen w-72 shrink-0 flex-col bg-ink text-cream border-r border-ink/10 transition-all duration-300">
 
               {/* Logo Area */}
-              <div className="flex h-[72px] shrink-0 items-center px-6 border-b border-cream/10">
-                <div className="flex items-center gap-3">
-                  <p className="text-xl font-bold text-brand">Manong</p>
+              <div className="flex h-[72px] shrink-0 items-center px-0 border-b border-cream/10">
+                <div className="flex items-left gap-3 justify-start">
+                  <img src={logo} alt="Logo" className="h-48 w-48" />
                 </div>
               </div>
 
