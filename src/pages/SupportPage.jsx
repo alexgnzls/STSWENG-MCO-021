@@ -86,10 +86,10 @@ export default function SupportPage() {
                                 {shown.map((caseSelected) => (
                                     <tr key={caseSelected.id} tabIndex={0} onClick={() => setOpenId(caseSelected.id)} onKeyDown={(e) => e.key === 'Enter' && setOpenId(caseSelected.id)}
                                         className="cursor-pointer hover:bg-brand/10">
-                                        <td className={cx(TD, 'font-semibold')}>{caseSelected.id.slice(0, 8)}</td>
+                                        <td className={cx(TD, 'font-semibold whitespace-nowrap')}>{caseSelected.code}</td>
                                         <td className={TD}>{caseSelected.resident.split(',')[0]}</td>
                                         <td className={TD}>{caseSelected.category}</td>
-                                        <td className={TD}>{caseSelected.booking.slice(0, 8)}</td>
+                                        <td className={cx(TD, 'whitespace-nowrap')}>{caseSelected.booking}</td>
                                         <td className={TD}><Badge value={caseSelected.status} /></td>
                                         <td className={cx(TD, caseSelected.assignee === 'Unassigned' && 'text-ink/40')}>{caseSelected.assignee}</td>
                                         <td className={cx(TD, 'text-ink/60')}>{caseSelected.created}</td>

@@ -48,13 +48,14 @@ const formatDate = (date) => {
 function formatRow (row) {
     return {
         id: row.ticket_id,
+        code: row.ticket_code || row.ticket_id?.slice(0, 8) || 'N/A',
         category: formatCategory(row.ticket_category),
         status: convertDB2UI[row.ticket_status] || 'Open',
         created: formatDate(row.receive_date),
         resident: row.resident?.full_name || row.resident_id || 'N/A',
         aide: row.aide?.full_name || row.aide_id || 'N/A',
         property: row.booking?.property_name || 'N/A',
-        booking: row.booking_id || 'N/A',
+        booking: row.booking?.booking_code || row.booking_id || 'N/A',
         txn: row.booking?.transaction_id || 'N/A',
         assignee: row.assigned_employee?.employee_name || 'Unassigned',
         description: row.ticket_description || '',
@@ -108,6 +109,10 @@ export async function fetchCases() {
  * @returns {Promise<Object>} - A promise that resolves to an object containing the added note's details
  */
 export async function addTicketNote(ticketId, noteText, currentAdminId) {
+    if (!noteText.trim()) {
+        throw new Error('Note cannot be empty or consist only of spaces.');
+    }
+
     const { data, error } = await supabase
         .from('adm_ticket_notes')
         .insert({
@@ -145,12 +150,12 @@ export async function addTicketNote(ticketId, noteText, currentAdminId) {
  */
 export async function startTicketReview(ticketId, adminId) {
     const { data, error } = await supabase
-    .from('adm_tickets')
-    .update({
-        ticket_status: convertUI2DB['In Review'],
-        assigned_employee_id: adminId
-    })
-    .eq('ticket_id', ticketId);
+        .from('adm_tickets')
+        .update({
+            ticket_status: convertUI2DB['In Review'],
+            assigned_employee_id: adminId
+        })
+        .eq('ticket_id', ticketId);
 
     if (error) {
         console.error('Error starting ticket review:', error);
@@ -165,14 +170,18 @@ export async function startTicketReview(ticketId, adminId) {
  * @param {string} resolutionText - The text describing the resolution of the ticket.
  */
 export async function resolveTicket(ticketId, resolutionText) {
+    if (!noteText.trim()) {
+        throw new Error('Note cannot be empty or consist only of spaces.');
+    }
+
     const { data, error } = await supabase
-    .from('adm_tickets')
-    .update({
-        ticket_status: convertUI2DB ['Resolved'],
-        ticket_remarks: resolutionText,
-        resolve_date: new Date().toISOString(),
-    })
-    .eq('ticket_id', ticketId);
+        .from('adm_tickets')
+        .update({
+            ticket_status: convertUI2DB ['Resolved'],
+            ticket_remarks: resolutionText,
+            resolve_date: new Date().toISOString(),
+        })
+        .eq('ticket_id', ticketId);
 
     if (error) {
         console.error('Error resolving ticket:', error);
@@ -187,12 +196,12 @@ export async function resolveTicket(ticketId, resolutionText) {
  */
 export async function closeTicket(ticketId) {
     const { data, error } = await supabase
-    .from('adm_tickets')
-    .update({
-        ticket_status: convertUI2DB ['Closed'],
-        close_date: new Date().toISOString(),
-    })
-    .eq('ticket_id', ticketId);
+        .from('adm_tickets')
+        .update({
+            ticket_status: convertUI2DB ['Closed'],
+            close_date: new Date().toISOString(),
+        })
+        .eq('ticket_id', ticketId);
 
     if (error) {
         console.error('Error closing ticket:', error);
