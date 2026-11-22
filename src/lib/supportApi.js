@@ -45,7 +45,21 @@ const formatDate = (date) => {
  *
  * @param {Object} row - A single row from the database representing a support case.
  */
-function formatRow (row) {
+function formatRowTicket (row) {
+    const aideName = [
+        row.aide?.first_name,
+        row.aide?.middle_name,
+        row.aide?.last_name,
+        row.aide?.suffix,
+    ]
+        .filter(Boolean)
+        .join(' ');
+
+    const condoName = row.booking?.address?.condo?.name;
+    const unitDetails = [row.booking?.address?.tower, row.booking?.address?.unit_number]
+        .filter(Boolean)
+        .join(' ');
+
     return {
         id: row.ticket_id,
         code: row.ticket_code || row.ticket_id?.slice(0, 8) || 'N/A',
@@ -53,10 +67,10 @@ function formatRow (row) {
         status: convertDB2UI[row.ticket_status] || 'Open',
         created: formatDate(row.receive_date),
         resident: row.resident?.full_name || row.resident_id || 'N/A',
-        aide: row.aide?.full_name || row.aide_id || 'N/A',
-        property: row.booking?.property_name || 'N/A',
+        aide: aideName || row.aide_id || 'N/A',
+        property: row.booking?.address?.condo?.name || 'N/A',
         booking: row.booking?.booking_code || row.booking_id || 'N/A',
-        txn: row.booking?.transaction_id || 'N/A',
+        txn: row.booking?.payment_method?.toUpperCase() || 'N/A',
         assignee: row.assigned_employee?.employee_name || 'Unassigned',
         description: row.ticket_description || '',
         notes: (row.notes || []).map((n) => ({
@@ -96,7 +110,7 @@ export async function fetchCases() {
         console.error('Error fetching cases:', error);
         throw error;
     }
-    return data.map(formatRow);
+    return data.map(formatRowTicket);
 }
 
 /*
