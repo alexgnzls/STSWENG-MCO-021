@@ -15,6 +15,13 @@ const convertDB2UI = {
 }
 
 /*
+This function formats a category string by removing the underscore and capitalizing the first letter of each word.
+If the category is null or undefined, it returns 'Other'.
+ */
+const formatCategory = (cat) =>
+    cat ? cat.split('_').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : 'Other';
+
+/*
  * Format a date string from the database.
  * The format includes the month (short), day, year, and time (hour and minute).
  *
@@ -41,7 +48,7 @@ const formatDate = (date) => {
 function formatRow (row) {
     return {
         id: row.ticket_id,
-        category: row.ticket_category,
+        category: formatCategory(row.ticket_category),
         status: convertDB2UI[row.ticket_status] || 'Open',
         created: formatDate(row.receive_date),
         resident: row.resident?.full_name || row.resident_id || 'N/A',
