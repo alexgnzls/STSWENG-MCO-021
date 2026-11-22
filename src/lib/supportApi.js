@@ -15,6 +15,13 @@ const convertDB2UI = {
 }
 
 /*
+This function formats a category string by removing the underscore and capitalizing the first letter of each word.
+If the category is null or undefined, it returns 'Other'.
+ */
+const formatCategory = (cat) =>
+    cat ? cat.split('_').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : 'Other';
+
+/*
  * Format a date string from the database.
  * The format includes the month (short), day, year, and time (hour and minute).
  *
@@ -38,17 +45,32 @@ const formatDate = (date) => {
  *
  * @param {Object} row - A single row from the database representing a support case.
  */
-function formatRow (row) {
+function formatRowTicket (row) {
+    const aideName = [
+        row.aide?.first_name,
+        row.aide?.middle_name,
+        row.aide?.last_name,
+        row.aide?.suffix,
+    ]
+        .filter(Boolean)
+        .join(' ');
+
+    const condoName = row.booking?.address?.condo?.name;
+    const unitDetails = [row.booking?.address?.tower, row.booking?.address?.unit_number]
+        .filter(Boolean)
+        .join(' ');
+
     return {
         id: row.ticket_id,
-        category: row.ticket_category,
+        code: row.ticket_code || row.ticket_id?.slice(0, 8) || 'N/A',
+        category: formatCategory(row.ticket_category),
         status: convertDB2UI[row.ticket_status] || 'Open',
         created: formatDate(row.receive_date),
         resident: row.resident?.full_name || row.resident_id || 'N/A',
-        aide: row.aide?.full_name || row.aide_id || 'N/A',
-        property: row.booking?.property_name || 'N/A',
-        booking: row.booking_id || 'N/A',
-        txn: row.booking?.transaction_id || 'N/A',
+        aide: aideName || row.aide_id || 'N/A',
+        property: row.booking?.address?.condo?.name || 'N/A',
+        booking: row.booking?.booking_code || row.booking_id || 'N/A',
+        txn: row.booking?.payment_method?.toUpperCase() || 'N/A',
         assignee: row.assigned_employee?.employee_name || 'Unassigned',
         description: row.ticket_description || '',
         notes: (row.notes || []).map((n) => ({
@@ -58,7 +80,7 @@ function formatRow (row) {
             text: n.note || '',
         })),
         resolution: row.ticket_remarks || '',
-    }
+    };
 }
 
 /*
@@ -74,7 +96,12 @@ export async function fetchCases() {
             assigned_employee:adm_employees!adm_tickets_assigned_employee_id_fkey(employee_id, employee_name),
             resident:usr_residents(*),
             aide:aide_aides(*),
-            booking:usr_bookings(*),
+            booking:usr_bookings(
+                *,
+                address:usr_resident_addresses(
+                condo:usr_condominiums(name)
+                )
+            ),
             notes:adm_ticket_notes(
                 note_id,
                 note,
@@ -84,11 +111,12 @@ export async function fetchCases() {
         `)
         .order('receive_date', { ascending: false })
         .order('creation_date', { referencedTable: 'notes', ascending: true });
+
     if (error) {
         console.error('Error fetching cases:', error);
         throw error;
     }
-    return data.map(formatRow);
+    return data.map(formatRowTicket);
 }
 
 /*
