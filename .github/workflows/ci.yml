@@ -94,10 +94,12 @@ jobs:
     if: github.event_name != 'pull_request'
 
     env:
-      QA_USERNAME: ${{ secrets.QA_USERNAME }}
-      QA_PASSWORD: ${{ secrets.QA_PASSWORD }}
-      VITE_SUPABASE_URL: ${{ secrets.QA_SUPABASE_URL }}
-      VITE_SUPABASE_ANON_KEY: ${{ secrets.QA_SUPABASE_ANON_KEY }}
+     QA_USERNAME: ${{ secrets.QA_USERNAME }}
+     QA_PASSWORD: ${{ secrets.QA_PASSWORD }}
+     QA_DISPLAY_NAME: ${{ vars.QA_DISPLAY_NAME }}
+    
+     VITE_SUPABASE_URL: ${{ secrets.QA_SUPABASE_URL }}
+     VITE_SUPABASE_ANON_KEY: ${{ secrets.QA_SUPABASE_ANON_KEY }}
 
     steps:
       - name: Checkout repository
