@@ -39,7 +39,7 @@ TC-D05-02 Empty And Spaces-Only Notes Cannot Be Added
 
 *** Keywords ***
 Open Editable QA Case
-    Should Match Regexp    ${CASE_ID}    ^(CS-[0-9]+|[0-9a-fA-F]{8})$    msg=Set D05_CASE_ID to the editable QA ticket ID shown in the Case column.
+    Should Match Regexp    ${CASE_ID}    ^(TKT-[0-9]+-[0-9]{8}|CS-[0-9]+|[0-9a-fA-F]{8})$    msg=Set D05_CASE_ID to the full editable QA ticket ID shown in the Case column.
     Open Login Page
     Log In As Valid Admin
     ${row}=    Set Variable    xpath://tbody/tr[td[1][normalize-space()="${CASE_ID}"]]
