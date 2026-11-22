@@ -45,21 +45,7 @@ const formatDate = (date) => {
  *
  * @param {Object} row - A single row from the database representing a support case.
  */
-function formatRowTicket (row) {
-    const aideName = [
-        row.aide?.first_name,
-        row.aide?.middle_name,
-        row.aide?.last_name,
-        row.aide?.suffix,
-    ]
-        .filter(Boolean)
-        .join(' ');
-
-    const condoName = row.booking?.address?.condo?.name;
-    const unitDetails = [row.booking?.address?.tower, row.booking?.address?.unit_number]
-        .filter(Boolean)
-        .join(' ');
-
+function formatRow (row) {
     return {
         id: row.ticket_id,
         code: row.ticket_code || row.ticket_id?.slice(0, 8) || 'N/A',
@@ -67,10 +53,10 @@ function formatRowTicket (row) {
         status: convertDB2UI[row.ticket_status] || 'Open',
         created: formatDate(row.receive_date),
         resident: row.resident?.full_name || row.resident_id || 'N/A',
-        aide: aideName || row.aide_id || 'N/A',
-        property: row.booking?.address?.condo?.name || 'N/A',
+        aide: row.aide?.full_name || row.aide_id || 'N/A',
+        property: row.booking?.property_name || 'N/A',
         booking: row.booking?.booking_code || row.booking_id || 'N/A',
-        txn: row.booking?.payment_method?.toUpperCase() || 'N/A',
+        txn: row.booking?.transaction_id || 'N/A',
         assignee: row.assigned_employee?.employee_name || 'Unassigned',
         description: row.ticket_description || '',
         notes: (row.notes || []).map((n) => ({
@@ -80,7 +66,7 @@ function formatRowTicket (row) {
             text: n.note || '',
         })),
         resolution: row.ticket_remarks || '',
-    };
+    }
 }
 
 /*
@@ -96,12 +82,7 @@ export async function fetchCases() {
             assigned_employee:adm_employees!adm_tickets_assigned_employee_id_fkey(employee_id, employee_name),
             resident:usr_residents(*),
             aide:aide_aides(*),
-            booking:usr_bookings(
-                *,
-                address:usr_resident_addresses(
-                condo:usr_condominiums(name)
-                )
-            ),
+            booking:usr_bookings(*),
             notes:adm_ticket_notes(
                 note_id,
                 note,
@@ -111,12 +92,11 @@ export async function fetchCases() {
         `)
         .order('receive_date', { ascending: false })
         .order('creation_date', { referencedTable: 'notes', ascending: true });
-
     if (error) {
         console.error('Error fetching cases:', error);
         throw error;
     }
-    return data.map(formatRowTicket);
+    return data.map(formatRow);
 }
 
 /*
@@ -129,6 +109,10 @@ export async function fetchCases() {
  * @returns {Promise<Object>} - A promise that resolves to an object containing the added note's details
  */
 export async function addTicketNote(ticketId, noteText, currentAdminId) {
+    if (!noteText.trim()) {
+        throw new Error('Note cannot be empty or consist only of spaces.');
+    }
+
     const { data, error } = await supabase
         .from('adm_ticket_notes')
         .insert({
@@ -166,12 +150,12 @@ export async function addTicketNote(ticketId, noteText, currentAdminId) {
  */
 export async function startTicketReview(ticketId, adminId) {
     const { data, error } = await supabase
-    .from('adm_tickets')
-    .update({
-        ticket_status: convertUI2DB['In Review'],
-        assigned_employee_id: adminId
-    })
-    .eq('ticket_id', ticketId);
+        .from('adm_tickets')
+        .update({
+            ticket_status: convertUI2DB['In Review'],
+            assigned_employee_id: adminId
+        })
+        .eq('ticket_id', ticketId);
 
     if (error) {
         console.error('Error starting ticket review:', error);
@@ -186,14 +170,18 @@ export async function startTicketReview(ticketId, adminId) {
  * @param {string} resolutionText - The text describing the resolution of the ticket.
  */
 export async function resolveTicket(ticketId, resolutionText) {
+    if (!noteText.trim()) {
+        throw new Error('Note cannot be empty or consist only of spaces.');
+    }
+
     const { data, error } = await supabase
-    .from('adm_tickets')
-    .update({
-        ticket_status: convertUI2DB ['Resolved'],
-        ticket_remarks: resolutionText,
-        resolve_date: new Date().toISOString(),
-    })
-    .eq('ticket_id', ticketId);
+        .from('adm_tickets')
+        .update({
+            ticket_status: convertUI2DB ['Resolved'],
+            ticket_remarks: resolutionText,
+            resolve_date: new Date().toISOString(),
+        })
+        .eq('ticket_id', ticketId);
 
     if (error) {
         console.error('Error resolving ticket:', error);
@@ -208,12 +196,12 @@ export async function resolveTicket(ticketId, resolutionText) {
  */
 export async function closeTicket(ticketId) {
     const { data, error } = await supabase
-    .from('adm_tickets')
-    .update({
-        ticket_status: convertUI2DB ['Closed'],
-        close_date: new Date().toISOString(),
-    })
-    .eq('ticket_id', ticketId);
+        .from('adm_tickets')
+        .update({
+            ticket_status: convertUI2DB ['Closed'],
+            close_date: new Date().toISOString(),
+        })
+        .eq('ticket_id', ticketId);
 
     if (error) {
         console.error('Error closing ticket:', error);
