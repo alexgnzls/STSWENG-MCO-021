@@ -5,3 +5,4 @@ BROWSER = "headlesschrome"
 
 VALID_USER = os.environ["QA_USERNAME"]
 VALID_PASS = os.environ["QA_PASSWORD"]
+VALID_DISPLAY_NAME = os.environ["QA_DISPLAY_NAME"]
