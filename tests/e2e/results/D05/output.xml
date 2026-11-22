@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.5.1 (Python 3.11.9 on win32)" generated="2026-11-22T22:15:32.990410" rpa="false" schemaversion="5">
+<suite id="s1" name="D05 case notes" source="C:\Users\King Mejia\OneDrive\Desktop\STSWENG\STSWENG-MCO-021\tests\e2e\suites\D05_case_notes.robot">
+<test id="s1-t1" name="TC-D05-01 Adding A Note Records It In Case History" line="14">
+<kw name="Open Editable QA Case" type="SETUP">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${CASE_ID}</arg>
+<arg>^(TKT-[0-9]+-[0-9]{8}|CS-[0-9]+|[0-9a-fA-F]{8})$</arg>
+<arg>msg=Set D05_CASE_ID to the full editable QA ticket ID shown in the Case column.</arg>
+<doc>Fails if the `string` does not match the regular expression `pattern`.</doc>
+<status status="PASS" start="2026-11-22T22:15:33.390439" elapsed="0.000997"/>
+</kw>
+<kw name="Open Login Page" owner="common">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:33.391436" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-22T22:15:33.391436" elapsed="1.856944"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-22T22:15:35.248380" elapsed="0.053001"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T22:15:35.302382" elapsed="0.039522"/>
+</kw>
+<status status="PASS" start="2026-11-22T22:15:33.391436" elapsed="1.950468"/>
+</kw>
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:35.343902" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:35.342901" elapsed="0.146530"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:35.490431" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-22T22:15:35.550961" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:35.489431" elapsed="0.218061"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:35.707492" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:35.707492" elapsed="0.061537"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-22T22:15:35.342901" elapsed="0.426128"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-22T22:15:35.769029" elapsed="1.066398"/>
+</kw>
+<status status="PASS" start="2026-11-22T22:15:35.341904" elapsed="1.493523"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-22T22:15:36.836423" level="INFO">${row} = xpath://tbody/tr[td[1][normalize-space()="TKT-1006-20261122"]]</msg>
+<var>${row}</var>
+<arg>xpath://tbody/tr[td[1][normalize-space()="${CASE_ID}"]]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-22T22:15:36.836423" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${row}</arg>
+<arg>timeout=15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T22:15:36.837422" elapsed="0.219824"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:37.061246" level="INFO">Current page contains 1 element(s).</msg>
+<arg>${row}</arg>
+<arg>limit=1</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2026-11-22T22:15:37.057246" elapsed="0.004000"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:37.062246" level="INFO">Clicking element 'xpath://tbody/tr[td[1][normalize-space()="TKT-1006-20261122"]]'.</msg>
+<arg>${row}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:37.062246" elapsed="0.073337"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${NOTE_BOX}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T22:15:37.135583" elapsed="0.013993"/>
+</kw>
+<status status="PASS" start="2026-11-22T22:15:33.389436" elapsed="3.760140"/>
+</kw>
+<kw name="Generate Random String" owner="String">
+<msg time="2026-11-22T22:15:37.150576" level="INFO">${suffix} = hpg6fszkkhk9</msg>
+<var>${suffix}</var>
+<arg>12</arg>
+<arg>[LOWER][NUMBERS]</arg>
+<doc>Generates a string with a desired `length` from the given `chars`.</doc>
+<status status="PASS" start="2026-11-22T22:15:37.149576" elapsed="0.001000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-22T22:15:37.150576" level="INFO">${note} = QA D05 follow-up hpg6fszkkhk9</msg>
+<var>${note}</var>
+<arg>QA D05 follow-up ${suffix}</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-22T22:15:37.150576" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-22T22:15:37.151577" level="INFO">${entry} = //aside//li[p[normalize-space()="QA D05 follow-up hpg6fszkkhk9"]]</msg>
+<var>${entry}</var>
+<arg>//aside//li[p[normalize-space()="${note}"]]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-22T22:15:37.150576" elapsed="0.001001"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:37.151577" level="INFO">Typing text 'QA D05 follow-up hpg6fszkkhk9' into text field 'css:aside input[placeholder="Add a note or response"]'.</msg>
+<arg>${NOTE_BOX}</arg>
+<arg>${note}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:37.151577" elapsed="0.141308"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:37.293881" level="INFO">Clicking button 'xpath://aside//button[normalize-space()="Add note"]'.</msg>
+<arg>${ADD_NOTE}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:37.292885" elapsed="0.052252"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath:${entry}</arg>
+<arg>timeout=15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T22:15:37.345137" elapsed="0.654641"/>
+</kw>
+<kw name="Textfield Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:38.016779" level="INFO">Content of text field 'css:aside input[placeholder="Add a note or response"]' is ''.</msg>
+<arg>${NOTE_BOX}</arg>
+<arg>${EMPTY}</arg>
+<doc>Verifies text field ``locator`` has exactly text ``expected``.</doc>
+<status status="PASS" start="2026-11-22T22:15:37.999778" elapsed="0.017001"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-22T22:15:38.017782" elapsed="2.179831"/>
+</kw>
+<kw name="Open Editable QA Case">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${CASE_ID}</arg>
+<arg>^(TKT-[0-9]+-[0-9]{8}|CS-[0-9]+|[0-9a-fA-F]{8})$</arg>
+<arg>msg=Set D05_CASE_ID to the full editable QA ticket ID shown in the Case column.</arg>
+<doc>Fails if the `string` does not match the regular expression `pattern`.</doc>
+<status status="PASS" start="2026-11-22T22:15:40.201609" elapsed="0.001999"/>
+</kw>
+<kw name="Open Login Page" owner="common">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:40.206605" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-22T22:15:40.205608" elapsed="1.510236"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-22T22:15:41.716844" elapsed="0.039535"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T22:15:41.756379" elapsed="0.016999"/>
+</kw>
+<status status="PASS" start="2026-11-22T22:15:40.203608" elapsed="1.569770"/>
+</kw>
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:41.774379" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:41.774379" elapsed="0.125534"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:41.900914" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-22T22:15:41.925911" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:41.900914" elapsed="0.122535"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:42.024455" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.024455" elapsed="0.068193"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-22T22:15:41.773378" elapsed="0.319270"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.092648" elapsed="0.473283"/>
+</kw>
+<status status="PASS" start="2026-11-22T22:15:41.773378" elapsed="0.792553"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-22T22:15:42.566932" level="INFO">${row} = xpath://tbody/tr[td[1][normalize-space()="TKT-1006-20261122"]]</msg>
+<var>${row}</var>
+<arg>xpath://tbody/tr[td[1][normalize-space()="${CASE_ID}"]]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.565931" elapsed="0.001001"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${row}</arg>
+<arg>timeout=15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.566932" elapsed="0.217373"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:42.789304" level="INFO">Current page contains 1 element(s).</msg>
+<arg>${row}</arg>
+<arg>limit=1</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.784305" elapsed="0.004999"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:42.789304" level="INFO">Clicking element 'xpath://tbody/tr[td[1][normalize-space()="TKT-1006-20261122"]]'.</msg>
+<arg>${row}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.789304" elapsed="0.072113"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${NOTE_BOX}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.861417" elapsed="0.013002"/>
+</kw>
+<status status="PASS" start="2026-11-22T22:15:40.200614" elapsed="2.673805"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath:${entry}</arg>
+<arg>timeout=15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.874419" elapsed="0.009000"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:42.888419" level="INFO">Current page contains 1 element(s).</msg>
+<arg>xpath:${entry}</arg>
+<arg>limit=1</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.884421" elapsed="0.003998"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:42.901421" level="INFO">${metadata} = Jarvis Wuckert, Nov 22, 2026, 10:15 PM</msg>
+<var>${metadata}</var>
+<arg>xpath:${entry}/p[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.888419" elapsed="0.013002"/>
+</kw>
+<kw name="Should Start With" owner="BuiltIn">
+<arg>${metadata}</arg>
+<arg>${VALID_DISPLAY_NAME},</arg>
+<doc>Fails if the string `str1` does not start with the string `str2`.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.901421" elapsed="0.000000"/>
+</kw>
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${metadata}</arg>
+<arg>,.*[0-9]</arg>
+<doc>Fails if the `string` does not match the regular expression `pattern`.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.901421" elapsed="0.000998"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-22T22:15:42.902419" elapsed="2.187192"/>
+</kw>
+<tag>D05</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-22T22:15:33.389436" elapsed="11.700175"/>
+</test>
+<test id="s1-t2" name="TC-D05-02 Empty And Spaces-Only Notes Cannot Be Added" line="31">
+<kw name="Open Editable QA Case" type="SETUP">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${CASE_ID}</arg>
+<arg>^(TKT-[0-9]+-[0-9]{8}|CS-[0-9]+|[0-9a-fA-F]{8})$</arg>
+<arg>msg=Set D05_CASE_ID to the full editable QA ticket ID shown in the Case column.</arg>
+<doc>Fails if the `string` does not match the regular expression `pattern`.</doc>
+<status status="PASS" start="2026-11-22T22:15:45.091609" elapsed="0.001000"/>
+</kw>
+<kw name="Open Login Page" owner="common">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:45.092609" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-22T22:15:45.092609" elapsed="1.441032"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-22T22:15:46.534640" elapsed="0.036009"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T22:15:46.570649" elapsed="0.018107"/>
+</kw>
+<status status="PASS" start="2026-11-22T22:15:45.092609" elapsed="1.497153"/>
+</kw>
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:46.590756" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:46.590756" elapsed="0.128531"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:46.719287" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-22T22:15:46.748287" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:46.719287" elapsed="0.124546"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:46.844832" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:46.844832" elapsed="0.061224"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-22T22:15:46.589762" elapsed="0.316294"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-22T22:15:46.906056" elapsed="0.675697"/>
+</kw>
+<status status="PASS" start="2026-11-22T22:15:46.589762" elapsed="0.991991"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-22T22:15:47.581753" level="INFO">${row} = xpath://tbody/tr[td[1][normalize-space()="TKT-1006-20261122"]]</msg>
+<var>${row}</var>
+<arg>xpath://tbody/tr[td[1][normalize-space()="${CASE_ID}"]]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-22T22:15:47.581753" elapsed="0.001000"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${row}</arg>
+<arg>timeout=15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T22:15:47.582753" elapsed="0.012996"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:47.600750" level="INFO">Current page contains 1 element(s).</msg>
+<arg>${row}</arg>
+<arg>limit=1</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2026-11-22T22:15:47.595749" elapsed="0.005001"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:47.601750" level="INFO">Clicking element 'xpath://tbody/tr[td[1][normalize-space()="TKT-1006-20261122"]]'.</msg>
+<arg>${row}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:47.600750" elapsed="0.069013"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${NOTE_BOX}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T22:15:47.670765" elapsed="0.013515"/>
+</kw>
+<status status="PASS" start="2026-11-22T22:15:45.091609" elapsed="2.592671"/>
+</kw>
+<kw name="Textfield Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:47.703279" level="INFO">Content of text field 'css:aside input[placeholder="Add a note or response"]' is ''.</msg>
+<arg>${NOTE_BOX}</arg>
+<arg>${EMPTY}</arg>
+<doc>Verifies text field ``locator`` has exactly text ``expected``.</doc>
+<status status="PASS" start="2026-11-22T22:15:47.684280" elapsed="0.018999"/>
+</kw>
+<kw name="Element Should Be Disabled" owner="SeleniumLibrary">
+<arg>${ADD_NOTE}</arg>
+<doc>Verifies that element identified by ``locator`` is disabled.</doc>
+<status status="PASS" start="2026-11-22T22:15:47.703279" elapsed="0.011004"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:47.715280" level="INFO">Typing text '   ' into text field 'css:aside input[placeholder="Add a note or response"]'.</msg>
+<arg>${NOTE_BOX}</arg>
+<arg>${SPACE}${SPACE}${SPACE}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:47.714283" elapsed="0.061527"/>
+</kw>
+<kw name="Element Should Be Disabled" owner="SeleniumLibrary">
+<arg>${ADD_NOTE}</arg>
+<doc>Verifies that element identified by ``locator`` is disabled.</doc>
+<status status="PASS" start="2026-11-22T22:15:47.775810" elapsed="0.008999"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T22:15:47.786810" level="INFO">Typing text 'QA validation' into text field 'css:aside input[placeholder="Add a note or response"]'.</msg>
+<arg>${NOTE_BOX}</arg>
+<arg>QA validation</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T22:15:47.785816" elapsed="0.099520"/>
+</kw>
+<kw name="Element Should Be Enabled" owner="SeleniumLibrary">
+<arg>${ADD_NOTE}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" start="2026-11-22T22:15:47.885336" elapsed="0.020242"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-22T22:15:47.906576" elapsed="2.186530"/>
+</kw>
+<tag>D05</tag>
+<tag>negative</tag>
+<status status="PASS" start="2026-11-22T22:15:45.090612" elapsed="5.002494"/>
+</test>
+<status status="PASS" start="2026-11-22T22:15:32.992411" elapsed="17.103710"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="2" fail="0" skip="0">D05</stat>
+<stat pass="1" fail="0" skip="0">negative</stat>
+<stat pass="1" fail="0" skip="0">positive</stat>
+</tag>
+<suite>
+<stat name="D05 case notes" id="s1" pass="2" fail="0" skip="0">D05 case notes</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
