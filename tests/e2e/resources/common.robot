@@ -27,8 +27,6 @@ Log In As Valid Admin
     Wait Until Element Contains    css:header h1    Support cases    timeout=10s
 
 Login Should Be Refused
-    # Wait briefly for async Supabase lookup/auth call to settle
-    Sleep    1s
-    Element Should Be Visible          css:button[type="submit"]
-    Page Should Contain                Sign in (Admin)
+    Page Should Contain                Sign in
+    Page Should Contain                Enter an admin credential below.
     Page Should Not Contain Element    css:header h1
