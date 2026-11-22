@@ -9,6 +9,7 @@ ${VALID_DISPLAY_NAME}   Jarvis Wuckert
 ${VALID_PASS}      jarvisWUCKERT.support
 ${WRONG_PASS}      wrongpass999
 ${UNKNOWN_USER}    qa.unregistered.021
+${CASE_DRAWER}    xpath://aside[.//button[@aria-label="Close case panel"]]
 
 *** Keywords ***
 Open Login Page

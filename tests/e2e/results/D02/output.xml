@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.5.1 (Python 3.14.8 on win32)" generated="2026-11-22T23:31:59.162814" rpa="false" schemaversion="5">
+<suite id="s1" name="D02 support requests" source="C:\Users\jjles\OneDrive\Documents\Visual Studio (Projects)\Studying Directory\STSWENG_MANG-JUAN\STSWENG-MCO-G7\tests\e2e\suites\D02_support_requests.robot">
+<test id="s1-t1" name="TC-D02-01: Support administrator sees incoming support requests in the queue" line="13">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:31:59.485472" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-22T23:31:59.485246" elapsed="0.773027"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-22T23:32:00.258536" elapsed="0.371384"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T23:32:00.630218" elapsed="0.028184"/>
+</kw>
+<status status="PASS" start="2026-11-22T23:31:59.484426" elapsed="1.174110"/>
+</kw>
+<kw name="Open Support Queue">
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:00.660458" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:00.660146" elapsed="0.098660"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:00.759292" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-22T23:32:00.779062" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:00.759016" elapsed="0.093856"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:00.853410" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:00.853108" elapsed="0.061681"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-22T23:32:00.659810" elapsed="0.255129"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-22T23:32:00.915153" elapsed="1.474085"/>
+</kw>
+<status status="PASS" start="2026-11-22T23:32:00.659501" elapsed="1.729850"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-22T23:32:02.389486" elapsed="0.008583"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain" owner="SeleniumLibrary">
+<arg>Loading support tickets...</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` disappears from the current page.</doc>
+<status status="PASS" start="2026-11-22T23:32:02.398265" elapsed="0.627622"/>
+</kw>
+<status status="PASS" start="2026-11-22T23:32:00.659067" elapsed="2.366995"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:03.037948" level="INFO">Element 'css:table thead' contains text 'Case'.</msg>
+<arg>css:table thead</arg>
+<arg>Case</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.026353" elapsed="0.011689"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:03.048124" level="INFO">Element 'css:table thead' contains text 'Resident'.</msg>
+<arg>css:table thead</arg>
+<arg>Resident</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.038342" elapsed="0.009983"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:03.058479" level="INFO">Element 'css:table thead' contains text 'Category'.</msg>
+<arg>css:table thead</arg>
+<arg>Category</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.048824" elapsed="0.009749"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:03.072734" level="INFO">Element 'css:table thead' contains text 'Booking'.</msg>
+<arg>css:table thead</arg>
+<arg>Booking</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.058872" elapsed="0.013961"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:03.084992" level="INFO">Element 'css:table thead' contains text 'Assigned to'.</msg>
+<arg>css:table thead</arg>
+<arg>Assigned to</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.073176" elapsed="0.011923"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:03.098221" level="INFO">Element 'css:table thead' contains text 'Received'.</msg>
+<arg>css:table thead</arg>
+<arg>Received</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.085421" elapsed="0.012896"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:03.105444" level="INFO">${ticket_count} = 18</msg>
+<var>${ticket_count}</var>
+<arg>css:table tbody tr[tabindex="0"]</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.098577" elapsed="0.006914"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${ticket_count} &gt;= 1</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.105868" elapsed="0.000603"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:03.119696" level="INFO">${case_code} = TKT-1014-20261122</msg>
+<var>${case_code}</var>
+<arg>css:table tbody tr[tabindex="0"]:first-child td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.106702" elapsed="0.013040"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:03.133836" level="INFO">${resident_name} = 6ce5fa32-a6eb-4cc9-b60b-c834a3145e42</msg>
+<var>${resident_name}</var>
+<arg>css:table tbody tr[tabindex="0"]:first-child td:nth-child(2)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.120049" elapsed="0.013833"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-11-22T23:32:03.134660" level="INFO">Length is 17.</msg>
+<arg>${case_code}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.134180" elapsed="0.000526"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-11-22T23:32:03.136114" level="INFO">Length is 36.</msg>
+<arg>${resident_name}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.134910" elapsed="0.001254"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-22T23:32:03.136543" elapsed="2.171415"/>
+</kw>
+<tag>D02</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-22T23:31:59.483487" elapsed="5.824735"/>
+</test>
+<test id="s1-t2" name="TC-D02-02: Clicking a support request opens the drawer and displays the complaint" line="29">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:05.309877" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-22T23:32:05.309718" elapsed="0.638134"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-22T23:32:05.948125" elapsed="0.369435"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T23:32:06.318033" elapsed="0.016993"/>
+</kw>
+<status status="PASS" start="2026-11-22T23:32:05.309342" elapsed="1.025846"/>
+</kw>
+<kw name="Open Support Queue">
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:06.336911" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:06.336665" elapsed="0.127753"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:06.465439" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-22T23:32:06.485240" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:06.464880" elapsed="0.095676"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:06.561145" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:06.560865" elapsed="0.051172"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-22T23:32:06.336312" elapsed="0.275848"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-22T23:32:06.612293" elapsed="1.044646"/>
+</kw>
+<status status="PASS" start="2026-11-22T23:32:06.336011" elapsed="1.321032"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-22T23:32:07.657187" elapsed="0.007765"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain" owner="SeleniumLibrary">
+<arg>Loading support tickets...</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` disappears from the current page.</doc>
+<status status="PASS" start="2026-11-22T23:32:07.665141" elapsed="0.210048"/>
+</kw>
+<status status="PASS" start="2026-11-22T23:32:06.335648" elapsed="1.539642"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:07.875877" level="INFO">Clicking element 'css:table tbody tr[tabindex="0"]:first-child'.</msg>
+<arg>css:table tbody tr[tabindex="0"]:first-child</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:07.875587" elapsed="0.050545"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CASE_DRAWER}</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T23:32:07.926587" elapsed="0.010557"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:07.949927" level="INFO">Element 'xpath://aside//h3[normalize-space()="Complaint"]' is displayed.</msg>
+<arg>xpath://aside//h3[normalize-space()="Complaint"]</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T23:32:07.937502" elapsed="0.012538"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:07.960347" level="INFO">${complaint_text} = Resident accidentally booked duplicate afternoon cleaning slots and canceled within 5 minutes. Full GCash refund processed.</msg>
+<var>${complaint_text}</var>
+<arg>xpath://aside//section[.//h3[normalize-space()="Complaint"]]//p</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:07.950365" elapsed="0.010026"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-11-22T23:32:07.961045" level="INFO">Length is 123.</msg>
+<arg>${complaint_text}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-11-22T23:32:07.960694" elapsed="0.000395"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-22T23:32:07.961446" elapsed="2.128743"/>
+</kw>
+<tag>D02</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-22T23:32:05.308887" elapsed="4.781617"/>
+</test>
+<test id="s1-t3" name="TC-D02-03: Pressing Enter on a focused request row opens the complaint drawer" line="38">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:10.092884" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-22T23:32:10.092581" elapsed="0.603655"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-22T23:32:10.696498" elapsed="0.373353"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T23:32:11.070058" elapsed="0.013099"/>
+</kw>
+<status status="PASS" start="2026-11-22T23:32:10.092048" elapsed="0.991218"/>
+</kw>
+<kw name="Open Support Queue">
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:11.084574" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:11.084366" elapsed="0.110519"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:11.195342" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-22T23:32:11.212009" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:11.195082" elapsed="0.090064"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:11.285751" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:11.285386" elapsed="0.053750"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-22T23:32:11.084129" elapsed="0.255162"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-22T23:32:11.339472" elapsed="0.421947"/>
+</kw>
+<status status="PASS" start="2026-11-22T23:32:11.083927" elapsed="0.677642"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-22T23:32:11.761730" elapsed="0.007612"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain" owner="SeleniumLibrary">
+<arg>Loading support tickets...</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` disappears from the current page.</doc>
+<status status="PASS" start="2026-11-22T23:32:11.769504" elapsed="0.211629"/>
+</kw>
+<status status="PASS" start="2026-11-22T23:32:11.083595" elapsed="0.897650"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:11.981853" level="INFO">Sending key(s) ('RETURN',) to css:table tbody tr[tabindex="0"]:first-child element.</msg>
+<msg time="2026-11-22T23:32:12.273596" level="INFO">Pressing special key RETURN to element.</msg>
+<msg time="2026-11-22T23:32:12.273870" level="INFO">Releasing special key RETURN.</msg>
+<arg>css:table tbody tr[tabindex="0"]:first-child</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-11-22T23:32:11.981570" elapsed="0.303869"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CASE_DRAWER}</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T23:32:12.285766" elapsed="0.010745"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:12.308599" level="INFO">Element 'xpath://aside//h3[normalize-space()="Complaint"]' is displayed.</msg>
+<arg>xpath://aside//h3[normalize-space()="Complaint"]</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T23:32:12.296876" elapsed="0.011861"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-22T23:32:12.309134" elapsed="2.127934"/>
+</kw>
+<tag>D02</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-22T23:32:10.091295" elapsed="4.346046"/>
+</test>
+<test id="s1-t4" name="TC-D02-04: Closing the case drawer returns to the incoming requests list" line="45">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:14.439323" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-22T23:32:14.439112" elapsed="0.581767"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-22T23:32:15.021140" elapsed="0.368715"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T23:32:15.390038" elapsed="0.013859"/>
+</kw>
+<status status="PASS" start="2026-11-22T23:32:14.438616" elapsed="0.965445"/>
+</kw>
+<kw name="Open Support Queue">
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:15.405814" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:15.405511" elapsed="0.118135"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:15.524312" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-22T23:32:15.543342" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:15.523935" elapsed="0.092863"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:15.617496" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:15.617115" elapsed="0.050149"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-22T23:32:15.405175" elapsed="0.262248"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-22T23:32:15.667610" elapsed="0.426456"/>
+</kw>
+<status status="PASS" start="2026-11-22T23:32:15.404879" elapsed="0.689298"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-22T23:32:16.094299" elapsed="0.007994"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain" owner="SeleniumLibrary">
+<arg>Loading support tickets...</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` disappears from the current page.</doc>
+<status status="PASS" start="2026-11-22T23:32:16.102467" elapsed="0.210921"/>
+</kw>
+<status status="PASS" start="2026-11-22T23:32:15.404475" elapsed="0.909032"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:16.314061" level="INFO">Clicking element 'css:table tbody tr[tabindex="0"]:first-child'.</msg>
+<arg>css:table tbody tr[tabindex="0"]:first-child</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:16.313803" elapsed="0.047274"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CASE_DRAWER}</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T23:32:16.361385" elapsed="0.010226"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:16.372195" level="INFO">Clicking button 'xpath://aside//button[@aria-label="Close case panel"]'.</msg>
+<arg>xpath://aside//button[@aria-label="Close case panel"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-22T23:32:16.371926" elapsed="0.052477"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" owner="SeleniumLibrary">
+<arg>${CASE_DRAWER}</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` disappears from the current page.</doc>
+<status status="PASS" start="2026-11-22T23:32:16.424745" elapsed="0.004821"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-22T23:32:16.439950" level="INFO">Element 'css:table' is displayed.</msg>
+<arg>css:table</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-22T23:32:16.429912" elapsed="0.010144"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-22T23:32:16.440480" elapsed="2.134961"/>
+</kw>
+<tag>D02</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-22T23:32:14.437968" elapsed="4.137890"/>
+</test>
+<status status="PASS" start="2026-11-22T23:31:59.164943" elapsed="19.412274"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="4" fail="0" skip="0">D02</stat>
+<stat pass="4" fail="0" skip="0">positive</stat>
+</tag>
+<suite>
+<stat name="D02 support requests" id="s1" pass="4" fail="0" skip="0">D02 support requests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
