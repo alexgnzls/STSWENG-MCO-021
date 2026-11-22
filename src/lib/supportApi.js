@@ -80,7 +80,7 @@ function formatRowTicket (row) {
             text: n.note || '',
         })),
         resolution: row.ticket_remarks || '',
-    };
+    }
 }
 
 /*
@@ -96,12 +96,7 @@ export async function fetchCases() {
             assigned_employee:adm_employees!adm_tickets_assigned_employee_id_fkey(employee_id, employee_name),
             resident:usr_residents(*),
             aide:aide_aides(*),
-            booking:usr_bookings(
-                *,
-                address:usr_resident_addresses(
-                condo:usr_condominiums(name)
-                )
-            ),
+            booking:usr_bookings(*),
             notes:adm_ticket_notes(
                 note_id,
                 note,
@@ -111,7 +106,6 @@ export async function fetchCases() {
         `)
         .order('receive_date', { ascending: false })
         .order('creation_date', { referencedTable: 'notes', ascending: true });
-
     if (error) {
         console.error('Error fetching cases:', error);
         throw error;
@@ -129,6 +123,10 @@ export async function fetchCases() {
  * @returns {Promise<Object>} - A promise that resolves to an object containing the added note's details
  */
 export async function addTicketNote(ticketId, noteText, currentAdminId) {
+    if (!noteText.trim()) {
+        throw new Error('Note cannot be empty or consist only of spaces.');
+    }
+
     const { data, error } = await supabase
         .from('adm_ticket_notes')
         .insert({
@@ -137,10 +135,10 @@ export async function addTicketNote(ticketId, noteText, currentAdminId) {
             employee_id: currentAdminId
         })
         .select(`
-            note_id, 
+            note_id,
             note,
             creation_date,
-            author:adm_employees(employee_name)
+            author:adm_employees!adm_ticket_notes_employee_id_fkey(employee_name)
         `)
         .single();
 
@@ -166,12 +164,12 @@ export async function addTicketNote(ticketId, noteText, currentAdminId) {
  */
 export async function startTicketReview(ticketId, adminId) {
     const { data, error } = await supabase
-    .from('adm_tickets')
-    .update({
-        ticket_status: convertUI2DB['In Review'],
-        assigned_employee_id: adminId
-    })
-    .eq('ticket_id', ticketId);
+        .from('adm_tickets')
+        .update({
+            ticket_status: convertUI2DB['In Review'],
+            assigned_employee_id: adminId
+        })
+        .eq('ticket_id', ticketId);
 
     if (error) {
         console.error('Error starting ticket review:', error);
@@ -186,14 +184,18 @@ export async function startTicketReview(ticketId, adminId) {
  * @param {string} resolutionText - The text describing the resolution of the ticket.
  */
 export async function resolveTicket(ticketId, resolutionText) {
+    if (!noteText.trim()) {
+        throw new Error('Note cannot be empty or consist only of spaces.');
+    }
+
     const { data, error } = await supabase
-    .from('adm_tickets')
-    .update({
-        ticket_status: convertUI2DB ['Resolved'],
-        ticket_remarks: resolutionText,
-        resolve_date: new Date().toISOString(),
-    })
-    .eq('ticket_id', ticketId);
+        .from('adm_tickets')
+        .update({
+            ticket_status: convertUI2DB ['Resolved'],
+            ticket_remarks: resolutionText,
+            resolve_date: new Date().toISOString(),
+        })
+        .eq('ticket_id', ticketId);
 
     if (error) {
         console.error('Error resolving ticket:', error);
@@ -208,12 +210,12 @@ export async function resolveTicket(ticketId, resolutionText) {
  */
 export async function closeTicket(ticketId) {
     const { data, error } = await supabase
-    .from('adm_tickets')
-    .update({
-        ticket_status: convertUI2DB ['Closed'],
-        close_date: new Date().toISOString(),
-    })
-    .eq('ticket_id', ticketId);
+        .from('adm_tickets')
+        .update({
+            ticket_status: convertUI2DB ['Closed'],
+            close_date: new Date().toISOString(),
+        })
+        .eq('ticket_id', ticketId);
 
     if (error) {
         console.error('Error closing ticket:', error);
