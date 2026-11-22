@@ -137,10 +137,10 @@ export async function addTicketNote(ticketId, noteText, currentAdminId) {
             employee_id: currentAdminId
         })
         .select(`
-            note_id, 
+            note_id,
             note,
             creation_date,
-            author:adm_employees(employee_name)
+            author:adm_employees!adm_ticket_notes_employee_id_fkey(employee_name)
         `)
         .single();
 
