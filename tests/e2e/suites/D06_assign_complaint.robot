@@ -26,10 +26,10 @@ TC-D06-01 Assign A Complaint To Another Staff Member
     TRY
         Click Element    ${target}
         Wait Until Element Is Not Visible    ${SEARCH}    timeout=15s
-        Assignee Should Be    ${TARGET_ASSIGNEE}
+        Wait Until Keyword Succeeds    15s    500ms    Assignee Should Be    ${TARGET_ASSIGNEE}
         Reload Page
         Open QA Complaint
-        Assignee Should Be    ${TARGET_ASSIGNEE}
+        Wait Until Keyword Succeeds    15s    500ms    Assignee Should Be    ${TARGET_ASSIGNEE}
     FINALLY
         Restore Starting Assignee
     END
@@ -48,7 +48,7 @@ TC-D06-02 Unknown Employee Search Leaves Assignee Unchanged
 
 *** Keywords ***
 Open Assigned QA Complaint
-    Should Match Regexp    ${CASE_ID}    ^[0-9a-fA-F]{8}$    msg=Set D06_CASE_ID to the unique eight-character QA Case value.
+    Should Match Regexp    ${CASE_ID}    ^(TKT-[0-9]+-[0-9]{8}|[0-9a-fA-F]{8})$    msg=Set D06_CASE_ID to the unique displayed QA Case ID (for example, TKT-1007-20261122).
     Should Not Be Empty    ${START_ASSIGNEE}    Set D06_START_ASSIGNEE to the starting QA employee's display name.
     Open Login Page
     Log In As Valid Admin
@@ -98,7 +98,7 @@ Restore Starting Assignee
     Open QA Complaint
     ${already_restored}=    Run Keyword And Return Status    Assignee Should Be    ${START_ASSIGNEE}
     IF    not $already_restored
-        Assignee Should Be    ${TARGET_ASSIGNEE}
+        Wait Until Keyword Succeeds    15s    500ms    Assignee Should Be    ${TARGET_ASSIGNEE}
         Open Employee Picker
         ${original}=    Search For Employee    ${START_ASSIGNEE}
         Click Element    ${original}
