@@ -50,7 +50,9 @@ export default function SupportPage() {
 
     //Update a case in the state when changes are made in the CaseDrawer
     const patchCase = (id, updates) => {
-        setCases ((cases) => cases.map((caseSelected) => cases.id === id ? { ...caseSelected, ...updates } : caseSelected))
+        setCases ((cases) =>
+            cases.map((caseSelected) =>
+                cases.id === id ? { ...caseSelected, ...updates } : caseSelected))
     }
 
     const shown = filter === 'All' ? cases : cases.filter((caseSelected) => caseSelected.status === filter);

@@ -61,7 +61,7 @@ TC-D01-08: Sign out returns to an empty login form
     [Tags]    positive    D01
     Log In As Valid Admin
     Click Button    xpath://aside//button[normalize-space()="Sign out"]
-    Wait Until Page Contains     Sign in (Admin)    timeout=10s
+    Wait Until Page Contains     Enter an admin credential below.    timeout=10s
     Textfield Value Should Be    id:username    ${EMPTY}
     Textfield Value Should Be    id:password    ${EMPTY}
 
@@ -69,9 +69,9 @@ TC-D01-09: Reloading after sign out stays on the login page
     [Tags]    negative    security    D01
     Log In As Valid Admin
     Click Button    xpath://aside//button[normalize-space()="Sign out"]
-    Wait Until Page Contains    Sign in (Admin)    timeout=10s
+    Wait Until Page Contains    Enter an admin credential below.    timeout=10s
     Reload Page
-    Page Should Contain                Sign in (Admin)
+    Page Should Contain                Enter an admin credential below.
     Page Should Not Contain Element    css:header h1
 
 TC-D01-10: Wrong password is refused
@@ -86,7 +86,7 @@ TC-D01-11: Browser Back cannot restore dashboard access after sign-out
     Go To    ${BASE_URL}
     Wait Until Element Contains    css:header h1    Support cases    timeout=10s
     Click Button    xpath://aside//button[normalize-space()="Sign out"]
-    Wait Until Page Contains    Sign in (Admin)    timeout=10s
+    Wait Until Page Contains    Enter an admin credential below.    timeout=10s
     Go Back
     Go Back
     Wait Until Location Contains    ${BASE_URL}    timeout=10s
@@ -101,7 +101,7 @@ TC-D01-14: Signing out in one tab signs the admin out in another tab
     Wait Until Element Contains    css:header h1    Support cases    timeout=10s
     Switch Window    ${tab_a}[0]
     Click Button     xpath://aside//button[normalize-space()="Sign out"]
-    Wait Until Page Contains    Sign in (Admin)    timeout=10s
+    Wait Until Page Contains    Enter an admin credential below.    timeout=10s
     Switch Window    NEW
-    Wait Until Page Contains           Sign in (Admin)    timeout=10s
+    Wait Until Page Contains           Enter an admin credential below.    timeout=10s
     Page Should Not Contain Element    css:header h1
