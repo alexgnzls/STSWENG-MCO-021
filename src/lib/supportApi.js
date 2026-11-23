@@ -62,14 +62,18 @@ function formatRowTicket (row) {
 
     return {
         id: row.ticket_id,
-        code: row.ticket_code || row.ticket_id?.slice(0, 8) || 'N/A',
+        code: row.ticket_code || 'N/A',
         category: formatCategory(row.ticket_category),
         status: convertDB2UI[row.ticket_status] || 'Open',
         created: formatDate(row.receive_date),
-        resident: row.resident?.full_name || row.resident_id || 'N/A',
-        aide: aideName || row.aide_id || 'N/A',
-        property: row.booking?.address?.condo?.name || 'N/A',
-        booking: row.booking?.booking_code || row.booking_id || 'N/A',
+        resident: row.resident?.full_name || 'N/A',
+        aide: aideName || 'N/A',
+        property: condoName
+            ? unitDetails
+                ? `${condoName} (${unitDetails})`
+                : condoName
+            : 'N/A',
+        booking: row.booking?.booking_code || 'N/A',
         txn: row.booking?.payment_method?.toUpperCase() || 'N/A',
         assignee: row.assigned_employee?.employee_name || 'Unassigned',
         description: row.ticket_description || '',
@@ -96,7 +100,14 @@ export async function fetchCases() {
             assigned_employee:adm_employees!adm_tickets_assigned_employee_id_fkey(employee_id, employee_name),
             resident:usr_residents(*),
             aide:aide_aides(*),
-            booking:usr_bookings(*),
+            booking:usr_bookings(
+                *,
+                address:usr_resident_addresses(
+                    tower,
+                    unit_number,
+                    condo:usr_condominiums(name)
+                )
+            ),
             notes:adm_ticket_notes(
                 note_id,
                 note,
@@ -135,10 +146,10 @@ export async function addTicketNote(ticketId, noteText, currentAdminId) {
             employee_id: currentAdminId
         })
         .select(`
-            note_id, 
+            note_id,
             note,
             creation_date,
-            author:adm_employees(employee_name)
+            author:adm_employees!adm_ticket_notes_employee_id_fkey(employee_name)
         `)
         .single();
 
@@ -184,7 +195,7 @@ export async function startTicketReview(ticketId, adminId) {
  * @param {string} resolutionText - The text describing the resolution of the ticket.
  */
 export async function resolveTicket(ticketId, resolutionText) {
-    if (!noteText.trim()) {
+    if (!resolutionText.trim()) {
         throw new Error('Note cannot be empty or consist only of spaces.');
     }
 
