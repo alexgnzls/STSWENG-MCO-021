@@ -1,71 +1,271 @@
-import { useState } from 'react'
-import {cx, BTN, TH, TD, peso, INPUT} from '../lib/utils'
-import Badge from "../components/Badge.jsx";
-import Modal from "../components/Modal.jsx";
-import {PayrollRun} from "./PayrollRun.jsx";
-import {PERIODS, ROWS, total} from "../lib/mockData.js";
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import Badge from '../components/Badge';
+import Metric from '../components/Metric';
+import PayrollModal from '../components/PayrollModal';
+import PayrollDetails from '../components/PayrollDetails';
+import { BTN, TH, TD, cx, peso } from '../lib/utils';
+import {
+  fetchPayrolls,
+  fetchPayrollDisbursements,
+  formatPayrollDateRange,
+  formatPayrollStatus,
+  roundHundredths,
+  deletePayroll,
+} from '../lib/payrollApi';
+
+const STATUS_FILTERS = ['all', 'draft', 'pending', 'processed'];
 
 export default function PayrollPage() {
-    const [periods, setPeriods] = useState(PERIODS)
-    const [activeId, setActiveId] = useState(null)
-    const [modal, setModal] = useState(false)
-    const [range, setRange] = useState({ start: '', end: '' })
+  const [payrolls, setPayrolls] = useState([]);
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [selectedId, setSelectedId] = useState(null);
+  const [disbursements, setDisbursements] = useState([]);
 
-    const setStatus = (id, status) => setPeriods((ps) => ps.map((p) => (p.id === id ? { ...p, status } : p)))
-    // STUB: POST /payroll-periods
-    const handleCreatePeriod = () => {
-        if (!range.start || !range.end || range.end < range.start) return
-        setPeriods([{ id: 'PP-' + Date.now().toString().slice(-4), label: `${range.start} to ${range.end}`, status: 'Draft' }, ...periods])
-        setRange({ start: '', end: '' })
-        setModal(false)
+  const [loadingList, setLoadingList] = useState(true);
+  const [loadingDetail, setLoadingDetail] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [pageError, setPageError] = useState('');
+  const [actionError, setActionError] = useState('');
+  const [showCreateModal, setShowCreateModal] = useState(false);
+
+  const loadPayrolls = useCallback(async (preferredId = null) => {
+    setLoadingList(true);
+    setPageError('');
+    try {
+      const rows = await fetchPayrolls();
+      setPayrolls(rows);
+      setSelectedId((prev) => {
+        if (preferredId && rows.some((r) => r.payroll_id === preferredId)) {
+          return preferredId;
+        }
+        if (prev && rows.some((r) => r.payroll_id === prev)) {
+          return prev;
+        }
+        return rows[0]?.payroll_id ?? null;
+      });
+    } catch (err) {
+      setPageError(err.message || 'Failed to load payroll runs.');
+    } finally {
+      setLoadingList(false);
     }
-    // STUB: POST /payroll-periods/:id/generate. Server groups completed, payable bookings per aide.
-    const handleGeneratePayroll = (id) => setStatus(id, 'Generated')
+  }, []);
 
-    const active = periods.find((p) => p.id === activeId)
-    if (active) return <PayrollRun period={active} onStatus={(s) => setStatus(active.id, s)} onBack={() => setActiveId(null)} />
+  useEffect(() => {
+    loadPayrolls();
+  }, [loadPayrolls]);
 
-    return (
-        <>
-            <div className="mb-4 flex items-center justify-between">
-                <p className="text-sm text-ink/60">Group completed services into a period, then generate, review and process.</p>
-                <button className={BTN.primary} onClick={() => setModal(true)}>New payroll period</button>
-            </div>
-            <div className="overflow-x-auto rounded-xl border border-ink/10 bg-white">
-                <table className="w-full text-sm">
-                    <thead className="border-b border-ink/10"><tr>{['Period', 'Reference', 'Status', 'Aides', 'Net payout', ''].map((h) => <th key={h} className={TH}>{h}</th>)}</tr></thead>
-                    <tbody className="divide-y divide-ink/5">
-                    {periods.map((p) => (
-                        <tr key={p.id}>
-                            <td className={cx(TD, 'font-semibold')}>{p.label}</td>
-                            <td className={cx(TD, 'text-ink/60')}>{p.id}</td>
-                            <td className={TD}><Badge value={p.status} /></td>
-                            <td className={TD}>{p.status === 'Draft' ? '-' : ROWS.length}</td>
-                            <td className={TD}>{p.status === 'Draft' ? '-' : peso(total('net'))}</td>
-                            <td className={cx(TD, 'text-right')}>
-                                {p.status === 'Draft'
-                                    ? <button className={BTN.dark} onClick={() => handleGeneratePayroll(p.id)}>Generate payroll</button>
-                                    : <button className={BTN.ghost} onClick={() => setActiveId(p.id)}>Open</button>}
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
+  useEffect(() => {
+    if (!selectedId) {
+      setDisbursements([]);
+      return;
+    }
 
-            {modal && (
-                <Modal title="New payroll period" onClose={() => setModal(false)}>
-                    <div className="grid grid-cols-2 gap-3">
-                        <label className="flex flex-col gap-1.5 text-sm font-medium">Start date<input type="date" className={INPUT} value={range.start} onChange={(e) => setRange({ ...range, start: e.target.value })} /></label>
-                        <label className="flex flex-col gap-1.5 text-sm font-medium">End date<input type="date" className={INPUT} value={range.end} onChange={(e) => setRange({ ...range, end: e.target.value })} /></label>
-                    </div>
-                    {range.start && range.end && range.end < range.start && <p className="mt-2 text-sm text-red-700">End date must be on or after the start date.</p>}
-                    <div className="mt-5 flex justify-end gap-2">
-                        <button className={BTN.ghost} onClick={() => setModal(false)}>Cancel</button>
-                        <button className={BTN.primary} onClick={handleCreatePeriod} disabled={!range.start || !range.end || range.end < range.start}>Create period</button>
-                    </div>
-                </Modal>
-            )}
-        </>
-    )
+    let cancelled = false;
+    setLoadingDetail(true);
+    setActionError('');
+
+    fetchPayrollDisbursements(selectedId)
+      .then((rows) => {
+        if (!cancelled) setDisbursements(rows);
+      })
+      .catch((err) => {
+        if (!cancelled) setActionError(err.message || 'Failed to load disbursements.');
+      })
+      .finally(() => {
+        if (!cancelled) setLoadingDetail(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedId]);
+
+  const filteredPayrolls = useMemo(() => {
+    if (statusFilter === 'all') return payrolls;
+    return payrolls.filter(
+      (p) => String(p.payroll_status).toLowerCase() === statusFilter
+    );
+  }, [payrolls, statusFilter]);
+
+  const selectedPayroll = useMemo(
+    () => payrolls.find((p) => p.payroll_id === selectedId) ?? null,
+    [payrolls, selectedId]
+  );
+
+  const kpis = useMemo(() => {
+    const activeRuns = payrolls.filter(
+      (p) => String(p.payroll_status).toLowerCase() !== 'processed'
+    ).length;
+    const processedTotal = payrolls
+      .filter((p) => String(p.payroll_status).toLowerCase() === 'processed')
+      .reduce((sum, p) => roundHundredths(sum + Number(p.total_payment || 0)), 0);
+
+    return {
+      totalRuns: payrolls.length,
+      activeRuns,
+      processedTotal,
+    };
+  }, [payrolls]);
+
+  const handleCreated = async (newPayroll) => {
+    setShowCreateModal(false);
+    setStatusFilter('all');
+    await loadPayrolls(newPayroll?.payroll_id ?? null);
+  };
+
+  const handleDeleteDraft = async (payrollId) => {
+    setDeleting(true);
+    setActionError('');
+    try {
+      await deletePayroll(payrollId);
+      await loadPayrolls();
+    } catch (err) {
+      setActionError(err.message);
+    } finally {
+      setDeleting(false);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Top Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-semibold text-ink">Payroll</h1>
+          <p className="text-sm text-ink/60">
+            Create payroll runs and review linked aide disbursements.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          className={BTN.primary}
+          onClick={() => setShowCreateModal(true)}
+        >
+          + New Payroll
+        </button>
+      </div>
+
+      {/* Overview Metrics */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <Metric label="Total Payroll Runs" value={kpis.totalRuns} />
+        <Metric
+          label="Draft & Pending"
+          value={kpis.activeRuns}
+          hint="Not yet finalized"
+        />
+        <Metric
+          label="Total Disbursed"
+          value={peso(kpis.processedTotal)}
+          hint="Processed payrolls"
+        />
+      </div>
+
+      {pageError && (
+        <p className="rounded-lg bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+          {pageError}
+        </p>
+      )}
+
+      {/* Payroll Runs Table */}
+      <section className="rounded-xl border border-ink/10 bg-white">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-ink/10 px-4 py-3">
+          <h2 className="text-sm font-semibold text-ink">Payroll Runs</h2>
+
+          <div className="flex gap-1.5">
+            {STATUS_FILTERS.map((status) => (
+              <button
+                key={status}
+                type="button"
+                onClick={() => setStatusFilter(status)}
+                className={cx(
+                  'rounded-lg px-3 py-1 text-xs font-medium capitalize transition',
+                  statusFilter === status
+                    ? 'bg-ink text-cream'
+                    : 'bg-ink/5 text-ink/70 hover:bg-ink/10'
+                )}
+              >
+                {status}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="border-b border-ink/10 bg-ink/[0.02]">
+              <tr>
+                <th className={TH}>Payroll Code</th>
+                <th className={TH}>Pay Period</th>
+                <th className={TH}>Status</th>
+                <th className={TH}>Aides</th>
+                <th className={TH}>Total Payment</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-ink/10">
+              {loadingList ? (
+                <tr>
+                  <td colSpan={5} className="px-4 py-6 text-center text-ink/50">
+                    Loading payrolls...
+                  </td>
+                </tr>
+              ) : filteredPayrolls.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="px-4 py-6 text-center text-ink/50">
+                    No payroll runs found. Click &ldquo;+ New Payroll&rdquo; to create one.
+                  </td>
+                </tr>
+              ) : (
+                filteredPayrolls.map((p) => {
+                  const isSelected = p.payroll_id === selectedId;
+                  return (
+                    <tr
+                      key={p.payroll_id}
+                      onClick={() => setSelectedId(p.payroll_id)}
+                      className={cx(
+                        'cursor-pointer transition',
+                        isSelected ? 'bg-brand/15' : 'hover:bg-ink/[0.03]'
+                      )}
+                    >
+                      <td className={`${TD} font-mono text-xs font-semibold`}>
+                        {p.payroll_code || p.payroll_id.slice(0, 8)}
+                      </td>
+                      <td className={TD}>
+                        {formatPayrollDateRange(p.start_date, p.end_date)}
+                      </td>
+                      <td className={TD}>
+                        <Badge value={formatPayrollStatus(p.payroll_status)} />
+                      </td>
+                      <td className={TD}>{p.aides_paid_count ?? 0}</td>
+                      <td className={`${TD} font-semibold`}>
+                        {peso(roundHundredths(p.total_payment))}
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* Selected Payroll Detail */}
+      <PayrollDetails
+        payroll={selectedPayroll}
+        disbursements={disbursements}
+        loading={loadingDetail}
+        deleting={deleting}
+        actionError={actionError}
+        onDeleteDraft={handleDeleteDraft}
+      />
+
+      {/* Create Modal */}
+      {showCreateModal && (
+        <PayrollModal
+          onClose={() => setShowCreateModal(false)}
+          onCreated={handleCreated}
+        />
+      )}
+    </div>
+  );
 }
