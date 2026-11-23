@@ -1,0 +1,2528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.5.1 (Python 3.14.8 on win32)" generated="2026-11-23T11:31:13.061342" rpa="false" schemaversion="5">
+<suite id="s1" name="D03 case status" source="C:\Users\jjles\OneDrive\Documents\Visual Studio (Projects)\Studying Directory\STSWENG_MANG-JUAN\STSWENG-MCO-G7\tests\e2e\suites\D03_case_status.robot">
+<test id="s1-t1" name="TC-D03-01: Every support case displays a valid lifecycle status in the queue" line="38">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:13.452755" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-23T11:31:13.452476" elapsed="1.051423"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-23T11:31:14.504357" elapsed="0.047533"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-23T11:31:14.552159" elapsed="0.024786"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:13.451626" elapsed="1.125589"/>
+</kw>
+<kw name="Open Support Queue">
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:14.579858" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:14.579441" elapsed="0.102577"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:14.682452" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-23T11:31:14.699716" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:14.682208" elapsed="0.080878"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:14.763477" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:14.763261" elapsed="0.049685"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-23T11:31:14.578941" elapsed="0.234137"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:14.813219" elapsed="0.628757"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:14.578508" elapsed="0.863589"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.442236" elapsed="0.008173"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain" owner="SeleniumLibrary">
+<arg>Loading support tickets...</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` disappears from the current page.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.450603" elapsed="0.425916"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:14.577882" elapsed="1.298788"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:15.887394" level="INFO">Element 'css:table thead' contains text 'Status'.</msg>
+<arg>css:table thead</arg>
+<arg>Status</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.877029" elapsed="0.010456"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:15.895608" level="INFO">${row_count} = 40</msg>
+<var>${row_count}</var>
+<arg>css:table tbody tr[tabindex="0"]</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.887789" elapsed="0.007863"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${row_count} &gt;= 1</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.895981" elapsed="0.000520"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:15.910163" level="INFO">${status} = In Review</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.897084" elapsed="0.013149"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.910489" elapsed="0.000696"/>
+</kw>
+<var name="${index}">1</var>
+<status status="PASS" start="2026-11-23T11:31:15.896976" elapsed="0.014272"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:15.921389" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.911495" elapsed="0.009941"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.921601" elapsed="0.000285"/>
+</kw>
+<var name="${index}">2</var>
+<status status="PASS" start="2026-11-23T11:31:15.911381" elapsed="0.010552"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:15.932385" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.922135" elapsed="0.010294"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.932588" elapsed="0.000272"/>
+</kw>
+<var name="${index}">3</var>
+<status status="PASS" start="2026-11-23T11:31:15.922041" elapsed="0.010865"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:15.943256" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.933142" elapsed="0.010159"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.943461" elapsed="0.000279"/>
+</kw>
+<var name="${index}">4</var>
+<status status="PASS" start="2026-11-23T11:31:15.933041" elapsed="0.010748"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:15.953921" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.943988" elapsed="0.010038"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.954282" elapsed="0.000411"/>
+</kw>
+<var name="${index}">5</var>
+<status status="PASS" start="2026-11-23T11:31:15.943899" elapsed="0.010870"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:15.965568" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.955053" elapsed="0.010559"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.965771" elapsed="0.000270"/>
+</kw>
+<var name="${index}">6</var>
+<status status="PASS" start="2026-11-23T11:31:15.954920" elapsed="0.011168"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:15.977009" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.966307" elapsed="0.010746"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.977220" elapsed="0.000276"/>
+</kw>
+<var name="${index}">7</var>
+<status status="PASS" start="2026-11-23T11:31:15.966191" elapsed="0.011351"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:15.987477" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.977738" elapsed="0.009784"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.987682" elapsed="0.000275"/>
+</kw>
+<var name="${index}">8</var>
+<status status="PASS" start="2026-11-23T11:31:15.977645" elapsed="0.010360"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:15.997649" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.988198" elapsed="0.009511"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.997884" elapsed="0.000303"/>
+</kw>
+<var name="${index}">9</var>
+<status status="PASS" start="2026-11-23T11:31:15.988110" elapsed="0.010127"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.008412" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:15.998480" elapsed="0.009979"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.008641" elapsed="0.000292"/>
+</kw>
+<var name="${index}">10</var>
+<status status="PASS" start="2026-11-23T11:31:15.998353" elapsed="0.010653"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.019223" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.009263" elapsed="0.010003"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.019429" elapsed="0.000279"/>
+</kw>
+<var name="${index}">11</var>
+<status status="PASS" start="2026-11-23T11:31:16.009157" elapsed="0.010598"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.029272" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.019948" elapsed="0.009409"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.029599" elapsed="0.000350"/>
+</kw>
+<var name="${index}">12</var>
+<status status="PASS" start="2026-11-23T11:31:16.019861" elapsed="0.010151"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.040899" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.030279" elapsed="0.010663"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.041101" elapsed="0.000268"/>
+</kw>
+<var name="${index}">13</var>
+<status status="PASS" start="2026-11-23T11:31:16.030151" elapsed="0.011264"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.051408" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.041598" elapsed="0.009853"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.051611" elapsed="0.000273"/>
+</kw>
+<var name="${index}">14</var>
+<status status="PASS" start="2026-11-23T11:31:16.041517" elapsed="0.010415"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.061949" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.052121" elapsed="0.009929"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.062281" elapsed="0.000411"/>
+</kw>
+<var name="${index}">15</var>
+<status status="PASS" start="2026-11-23T11:31:16.052037" elapsed="0.010750"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.073185" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.063071" elapsed="0.010158"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.073392" elapsed="0.000275"/>
+</kw>
+<var name="${index}">16</var>
+<status status="PASS" start="2026-11-23T11:31:16.062939" elapsed="0.010834"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.083750" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.074046" elapsed="0.009748"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.083959" elapsed="0.000274"/>
+</kw>
+<var name="${index}">17</var>
+<status status="PASS" start="2026-11-23T11:31:16.073929" elapsed="0.010353"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.094582" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.084470" elapsed="0.010181"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.094876" elapsed="0.000426"/>
+</kw>
+<var name="${index}">18</var>
+<status status="PASS" start="2026-11-23T11:31:16.084385" elapsed="0.011002"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.104830" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.095661" elapsed="0.009211"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.105029" elapsed="0.000263"/>
+</kw>
+<var name="${index}">19</var>
+<status status="PASS" start="2026-11-23T11:31:16.095539" elapsed="0.009802"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.115611" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.105525" elapsed="0.010135"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.115829" elapsed="0.000278"/>
+</kw>
+<var name="${index}">20</var>
+<status status="PASS" start="2026-11-23T11:31:16.105444" elapsed="0.010710"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.126299" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.116384" elapsed="0.009983"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.126606" elapsed="0.000418"/>
+</kw>
+<var name="${index}">21</var>
+<status status="PASS" start="2026-11-23T11:31:16.116287" elapsed="0.010813"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.136569" level="INFO">${status} = Open</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.127318" elapsed="0.009294"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.136766" elapsed="0.000265"/>
+</kw>
+<var name="${index}">22</var>
+<status status="PASS" start="2026-11-23T11:31:16.127222" elapsed="0.009856"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.148266" level="INFO">${status} = Closed</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.137270" elapsed="0.011041"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.148471" elapsed="0.000282"/>
+</kw>
+<var name="${index}">23</var>
+<status status="PASS" start="2026-11-23T11:31:16.137187" elapsed="0.011614"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.159583" level="INFO">${status} = Closed</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.148993" elapsed="0.010654"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.159841" elapsed="0.000301"/>
+</kw>
+<var name="${index}">24</var>
+<status status="PASS" start="2026-11-23T11:31:16.148909" elapsed="0.011282"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.169651" level="INFO">${status} = Closed</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.160389" elapsed="0.009305"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.169908" elapsed="0.000420"/>
+</kw>
+<var name="${index}">25</var>
+<status status="PASS" start="2026-11-23T11:31:16.160304" elapsed="0.010104"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.180695" level="INFO">${status} = Resolved</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.170691" elapsed="0.010069"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.180924" elapsed="0.000279"/>
+</kw>
+<var name="${index}">26</var>
+<status status="PASS" start="2026-11-23T11:31:16.170554" elapsed="0.010697"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.191151" level="INFO">${status} = Resolved</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.181443" elapsed="0.009752"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.191357" elapsed="0.000280"/>
+</kw>
+<var name="${index}">27</var>
+<status status="PASS" start="2026-11-23T11:31:16.181357" elapsed="0.010331"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.200759" level="INFO">${status} = Resolved</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.191907" elapsed="0.008891"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.200975" elapsed="0.000329"/>
+</kw>
+<var name="${index}">28</var>
+<status status="PASS" start="2026-11-23T11:31:16.191799" elapsed="0.009578"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.213155" level="INFO">${status} = Resolved</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.201652" elapsed="0.011579"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.213438" elapsed="0.000388"/>
+</kw>
+<var name="${index}">29</var>
+<status status="PASS" start="2026-11-23T11:31:16.201528" elapsed="0.012355"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.224737" level="INFO">${status} = In Review</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.214085" elapsed="0.010699"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.224945" elapsed="0.000280"/>
+</kw>
+<var name="${index}">30</var>
+<status status="PASS" start="2026-11-23T11:31:16.213993" elapsed="0.011283"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.235614" level="INFO">${status} = In Review</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.225476" elapsed="0.010203"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.235916" elapsed="0.000435"/>
+</kw>
+<var name="${index}">31</var>
+<status status="PASS" start="2026-11-23T11:31:16.225389" elapsed="0.011051"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.247203" level="INFO">${status} = In Review</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.236733" elapsed="0.010545"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.247642" elapsed="0.000614"/>
+</kw>
+<var name="${index}">32</var>
+<status status="PASS" start="2026-11-23T11:31:16.236595" elapsed="0.011819"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.258603" level="INFO">${status} = In Review</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.248729" elapsed="0.009920"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.258817" elapsed="0.000276"/>
+</kw>
+<var name="${index}">33</var>
+<status status="PASS" start="2026-11-23T11:31:16.248622" elapsed="0.010520"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.269438" level="INFO">${status} = Closed</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.259335" elapsed="0.010152"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.269649" elapsed="0.000279"/>
+</kw>
+<var name="${index}">34</var>
+<status status="PASS" start="2026-11-23T11:31:16.259246" elapsed="0.010731"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.279661" level="INFO">${status} = In Review</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.270175" elapsed="0.009553"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.279968" elapsed="0.000404"/>
+</kw>
+<var name="${index}">35</var>
+<status status="PASS" start="2026-11-23T11:31:16.270084" elapsed="0.010355"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.290361" level="INFO">${status} = In Review</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.280699" elapsed="0.009706"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.290559" elapsed="0.000269"/>
+</kw>
+<var name="${index}">36</var>
+<status status="PASS" start="2026-11-23T11:31:16.280593" elapsed="0.010297"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.301077" level="INFO">${status} = In Review</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.291083" elapsed="0.010037"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.301280" elapsed="0.000278"/>
+</kw>
+<var name="${index}">37</var>
+<status status="PASS" start="2026-11-23T11:31:16.290996" elapsed="0.010611"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.311515" level="INFO">${status} = Closed</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.301861" elapsed="0.009714"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.311788" elapsed="0.000330"/>
+</kw>
+<var name="${index}">38</var>
+<status status="PASS" start="2026-11-23T11:31:16.301762" elapsed="0.010404"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.321996" level="INFO">${status} = Closed</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.312360" elapsed="0.009680"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.322202" elapsed="0.000274"/>
+</kw>
+<var name="${index}">39</var>
+<status status="PASS" start="2026-11-23T11:31:16.312271" elapsed="0.010256"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:16.332816" level="INFO">${status} = Closed</msg>
+<var>${status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.322718" elapsed="0.010143"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${VALID_STATUSES}</arg>
+<arg>${status.strip()}</arg>
+<doc>Fails if the `value` is not found from `list`.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.333020" elapsed="0.000272"/>
+</kw>
+<var name="${index}">40</var>
+<status status="PASS" start="2026-11-23T11:31:16.322631" elapsed="0.010711"/>
+</iter>
+<var>${index}</var>
+<value>1</value>
+<value>${row_count} + 1</value>
+<status status="PASS" start="2026-11-23T11:31:15.896704" elapsed="0.436683"/>
+</for>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-23T11:31:16.333762" elapsed="2.106253"/>
+</kw>
+<tag>D03</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-23T11:31:13.450846" elapsed="4.989408"/>
+</test>
+<test id="s1-t2" name="TC-D03-02: Unresolved status tabs isolate Open and In Review cases" line="49">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:18.441907" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-23T11:31:18.441711" elapsed="0.628736"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-23T11:31:19.070661" elapsed="0.025364"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-23T11:31:19.096250" elapsed="0.013843"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:18.441291" elapsed="0.668975"/>
+</kw>
+<kw name="Open Support Queue">
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:19.112122" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:19.111811" elapsed="0.112017"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:19.224685" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-23T11:31:19.249633" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:19.224186" elapsed="0.108349"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:19.332933" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:19.332718" elapsed="0.052764"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-23T11:31:19.111457" elapsed="0.274132"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:19.385728" elapsed="0.625915"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:19.111125" elapsed="0.900620"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.011869" elapsed="0.008583"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain" owner="SeleniumLibrary">
+<arg>Loading support tickets...</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` disappears from the current page.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.020629" elapsed="0.210576"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:19.110660" elapsed="1.120652"/>
+</kw>
+<kw name="Verify Filtered Tab Shows Only Status">
+<kw name="Select Status Tab">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-23T11:31:20.232603" level="INFO">${tab} = xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Open"]</msg>
+<var>${tab}</var>
+<arg>xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="${status_label}"]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.232237" elapsed="0.000404"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.233031" level="INFO">Clicking button 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Open"]'.</msg>
+<arg>${tab}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.232787" elapsed="0.059280"/>
+</kw>
+<kw name="Element Attribute Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.308264" level="INFO">Element 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Open"]' attribute 'aria-selected' contains value 'true'.</msg>
+<arg>${tab}</arg>
+<arg>aria-selected</arg>
+<arg>true</arg>
+<doc>Verifies element identified by ``locator`` contains expected attribute value.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.292247" elapsed="0.016120"/>
+</kw>
+<arg>${expected_status}</arg>
+<status status="PASS" start="2026-11-23T11:31:20.232031" elapsed="0.076430"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.315229" level="INFO">${row_count} = 21</msg>
+<var>${row_count}</var>
+<arg>css:table tbody tr[tabindex="0"]</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.308598" elapsed="0.006674"/>
+</kw>
+<if>
+<branch type="IF" condition="${row_count} == 0">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${lower_status}</var>
+<arg>"${expected_status}".lower()</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2026-11-23T11:31:20.315672" elapsed="0.000027"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<arg>No ${lower_status} cases right now.</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="NOT RUN" start="2026-11-23T11:31:20.315790" elapsed="0.000020"/>
+</kw>
+<status status="NOT RUN" start="2026-11-23T11:31:20.315413" elapsed="0.000426"/>
+</branch>
+<branch type="ELSE">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.328251" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.316187" elapsed="0.012110"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.328472" elapsed="0.000440"/>
+</kw>
+<var name="${index}">1</var>
+<status status="PASS" start="2026-11-23T11:31:20.316106" elapsed="0.012869"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.339924" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.329187" elapsed="0.010785"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.340144" elapsed="0.000435"/>
+</kw>
+<var name="${index}">2</var>
+<status status="PASS" start="2026-11-23T11:31:20.329086" elapsed="0.011576"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.351764" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.340879" elapsed="0.010929"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.351982" elapsed="0.000393"/>
+</kw>
+<var name="${index}">3</var>
+<status status="PASS" start="2026-11-23T11:31:20.340777" elapsed="0.011650"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.364539" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.352623" elapsed="0.011978"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.364846" elapsed="0.000475"/>
+</kw>
+<var name="${index}">4</var>
+<status status="PASS" start="2026-11-23T11:31:20.352531" elapsed="0.012852"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.377953" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.365621" elapsed="0.012376"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.378164" elapsed="0.000393"/>
+</kw>
+<var name="${index}">5</var>
+<status status="PASS" start="2026-11-23T11:31:20.365509" elapsed="0.013103"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.390735" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.378810" elapsed="0.011998"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.391064" elapsed="0.000647"/>
+</kw>
+<var name="${index}">6</var>
+<status status="PASS" start="2026-11-23T11:31:20.378717" elapsed="0.013100"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.403993" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.392137" elapsed="0.011900"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.404253" elapsed="0.000453"/>
+</kw>
+<var name="${index}">7</var>
+<status status="PASS" start="2026-11-23T11:31:20.391985" elapsed="0.012798"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.416701" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.404984" elapsed="0.011760"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.416915" elapsed="0.000724"/>
+</kw>
+<var name="${index}">8</var>
+<status status="PASS" start="2026-11-23T11:31:20.404893" elapsed="0.012862"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.429618" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.418083" elapsed="0.011577"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.429825" elapsed="0.000379"/>
+</kw>
+<var name="${index}">9</var>
+<status status="PASS" start="2026-11-23T11:31:20.417918" elapsed="0.012340"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.440195" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.430447" elapsed="0.009791"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.440407" elapsed="0.000395"/>
+</kw>
+<var name="${index}">10</var>
+<status status="PASS" start="2026-11-23T11:31:20.430358" elapsed="0.010497"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.450268" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.441051" elapsed="0.009258"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.450468" elapsed="0.000423"/>
+</kw>
+<var name="${index}">11</var>
+<status status="PASS" start="2026-11-23T11:31:20.440959" elapsed="0.010000"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.461836" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.451168" elapsed="0.010709"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.462042" elapsed="0.000378"/>
+</kw>
+<var name="${index}">12</var>
+<status status="PASS" start="2026-11-23T11:31:20.451069" elapsed="0.011405"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.472720" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.462675" elapsed="0.010089"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.472932" elapsed="0.000421"/>
+</kw>
+<var name="${index}">13</var>
+<status status="PASS" start="2026-11-23T11:31:20.462576" elapsed="0.010841"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.483369" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.473628" elapsed="0.009788"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.483662" elapsed="0.000473"/>
+</kw>
+<var name="${index}">14</var>
+<status status="PASS" start="2026-11-23T11:31:20.473523" elapsed="0.010671"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.493988" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.484406" elapsed="0.009626"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.494194" elapsed="0.000385"/>
+</kw>
+<var name="${index}">15</var>
+<status status="PASS" start="2026-11-23T11:31:20.484303" elapsed="0.010333"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.504702" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.494830" elapsed="0.009918"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.504914" elapsed="0.000430"/>
+</kw>
+<var name="${index}">16</var>
+<status status="PASS" start="2026-11-23T11:31:20.494737" elapsed="0.010668"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.515446" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.505614" elapsed="0.009896"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.515746" elapsed="0.000582"/>
+</kw>
+<var name="${index}">17</var>
+<status status="PASS" start="2026-11-23T11:31:20.505512" elapsed="0.010902"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.526759" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.516743" elapsed="0.010060"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.526967" elapsed="0.000375"/>
+</kw>
+<var name="${index}">18</var>
+<status status="PASS" start="2026-11-23T11:31:20.516578" elapsed="0.010819"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.538132" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.527616" elapsed="0.010563"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.538356" elapsed="0.000411"/>
+</kw>
+<var name="${index}">19</var>
+<status status="PASS" start="2026-11-23T11:31:20.527515" elapsed="0.011309"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.550567" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.539028" elapsed="0.011608"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.550876" elapsed="0.000661"/>
+</kw>
+<var name="${index}">20</var>
+<status status="PASS" start="2026-11-23T11:31:20.538930" elapsed="0.012694"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.564523" level="INFO">${row_status} = Open</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.551878" elapsed="0.012710"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.564842" elapsed="0.000510"/>
+</kw>
+<var name="${index}">21</var>
+<status status="PASS" start="2026-11-23T11:31:20.551767" elapsed="0.013647"/>
+</iter>
+<var>${index}</var>
+<value>1</value>
+<value>${row_count} + 1</value>
+<status status="PASS" start="2026-11-23T11:31:20.315930" elapsed="0.249556"/>
+</for>
+<status status="PASS" start="2026-11-23T11:31:20.315878" elapsed="0.249672"/>
+</branch>
+<status status="PASS" start="2026-11-23T11:31:20.315377" elapsed="0.250209"/>
+</if>
+<arg>Open</arg>
+<status status="PASS" start="2026-11-23T11:31:20.231756" elapsed="0.333885"/>
+</kw>
+<kw name="Verify Filtered Tab Shows Only Status">
+<kw name="Select Status Tab">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-23T11:31:20.566805" level="INFO">${tab} = xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="In Review"]</msg>
+<var>${tab}</var>
+<arg>xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="${status_label}"]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.566543" elapsed="0.000288"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.567095" level="INFO">Clicking button 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="In Review"]'.</msg>
+<arg>${tab}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.566929" elapsed="0.051726"/>
+</kw>
+<kw name="Element Attribute Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.628415" level="INFO">Element 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="In Review"]' attribute 'aria-selected' contains value 'true'.</msg>
+<arg>${tab}</arg>
+<arg>aria-selected</arg>
+<arg>true</arg>
+<doc>Verifies element identified by ``locator`` contains expected attribute value.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.618875" elapsed="0.009644"/>
+</kw>
+<arg>${expected_status}</arg>
+<status status="PASS" start="2026-11-23T11:31:20.566347" elapsed="0.062272"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.633643" level="INFO">${row_count} = 8</msg>
+<var>${row_count}</var>
+<arg>css:table tbody tr[tabindex="0"]</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.628753" elapsed="0.004940"/>
+</kw>
+<if>
+<branch type="IF" condition="${row_count} == 0">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${lower_status}</var>
+<arg>"${expected_status}".lower()</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2026-11-23T11:31:20.634059" elapsed="0.000027"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<arg>No ${lower_status} cases right now.</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="NOT RUN" start="2026-11-23T11:31:20.634182" elapsed="0.000022"/>
+</kw>
+<status status="NOT RUN" start="2026-11-23T11:31:20.633829" elapsed="0.000406"/>
+</branch>
+<branch type="ELSE">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.644966" level="INFO">${row_status} = In Review</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.634600" elapsed="0.010417"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.645198" elapsed="0.000387"/>
+</kw>
+<var name="${index}">1</var>
+<status status="PASS" start="2026-11-23T11:31:20.634509" elapsed="0.011131"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.654746" level="INFO">${row_status} = In Review</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.645837" elapsed="0.008983"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.655088" elapsed="0.000728"/>
+</kw>
+<var name="${index}">2</var>
+<status status="PASS" start="2026-11-23T11:31:20.645740" elapsed="0.010182"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.665574" level="INFO">${row_status} = In Review</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.656343" elapsed="0.009282"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.665822" elapsed="0.000398"/>
+</kw>
+<var name="${index}">3</var>
+<status status="PASS" start="2026-11-23T11:31:20.656173" elapsed="0.010101"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.676075" level="INFO">${row_status} = In Review</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.666476" elapsed="0.009645"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.676327" elapsed="0.000436"/>
+</kw>
+<var name="${index}">4</var>
+<status status="PASS" start="2026-11-23T11:31:20.666379" elapsed="0.010442"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.684842" level="INFO">${row_status} = In Review</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.677019" elapsed="0.007869"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.685060" elapsed="0.000398"/>
+</kw>
+<var name="${index}">5</var>
+<status status="PASS" start="2026-11-23T11:31:20.676925" elapsed="0.008589"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.693793" level="INFO">${row_status} = In Review</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.685752" elapsed="0.008086"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.694004" elapsed="0.000388"/>
+</kw>
+<var name="${index}">6</var>
+<status status="PASS" start="2026-11-23T11:31:20.685632" elapsed="0.008816"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.702422" level="INFO">${row_status} = In Review</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.694647" elapsed="0.007822"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.702644" elapsed="0.000404"/>
+</kw>
+<var name="${index}">7</var>
+<status status="PASS" start="2026-11-23T11:31:20.694551" elapsed="0.008557"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:20.711113" level="INFO">${row_status} = In Review</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.703312" elapsed="0.007844"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.711314" elapsed="0.000370"/>
+</kw>
+<var name="${index}">8</var>
+<status status="PASS" start="2026-11-23T11:31:20.703212" elapsed="0.008525"/>
+</iter>
+<var>${index}</var>
+<value>1</value>
+<value>${row_count} + 1</value>
+<status status="PASS" start="2026-11-23T11:31:20.634318" elapsed="0.077461"/>
+</for>
+<status status="PASS" start="2026-11-23T11:31:20.634268" elapsed="0.077560"/>
+</branch>
+<status status="PASS" start="2026-11-23T11:31:20.633799" elapsed="0.078060"/>
+</if>
+<arg>In Review</arg>
+<status status="PASS" start="2026-11-23T11:31:20.566085" elapsed="0.145823"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-23T11:31:20.712272" elapsed="2.093598"/>
+</kw>
+<tag>D03</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-23T11:31:18.440819" elapsed="4.365307"/>
+</test>
+<test id="s1-t3" name="TC-D03-03: Completed status tabs isolate Resolved and Closed cases" line="55">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:22.807947" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-23T11:31:22.807719" elapsed="0.643254"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-23T11:31:23.451263" elapsed="0.030356"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-23T11:31:23.481893" elapsed="0.013081"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:22.807279" elapsed="0.687906"/>
+</kw>
+<kw name="Open Support Queue">
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:23.497164" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:23.496825" elapsed="0.088890"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:23.586152" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-23T11:31:23.603497" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:23.585908" elapsed="0.082835"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:23.669317" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:23.669025" elapsed="0.041921"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-23T11:31:23.496413" elapsed="0.214642"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:23.711191" elapsed="0.439706"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:23.496101" elapsed="0.655021"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.151379" elapsed="0.020277"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain" owner="SeleniumLibrary">
+<arg>Loading support tickets...</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` disappears from the current page.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.172092" elapsed="0.422720"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:23.495690" elapsed="1.099245"/>
+</kw>
+<kw name="Verify Filtered Tab Shows Only Status">
+<kw name="Select Status Tab">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-23T11:31:24.597329" level="INFO">${tab} = xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Resolved"]</msg>
+<var>${tab}</var>
+<arg>xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="${status_label}"]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.596681" elapsed="0.000713"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.597935" level="INFO">Clicking button 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Resolved"]'.</msg>
+<arg>${tab}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.597629" elapsed="0.050989"/>
+</kw>
+<kw name="Element Attribute Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.660290" level="INFO">Element 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Resolved"]' attribute 'aria-selected' contains value 'true'.</msg>
+<arg>${tab}</arg>
+<arg>aria-selected</arg>
+<arg>true</arg>
+<doc>Verifies element identified by ``locator`` contains expected attribute value.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.648834" elapsed="0.011591"/>
+</kw>
+<arg>${expected_status}</arg>
+<status status="PASS" start="2026-11-23T11:31:24.596210" elapsed="0.064353"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.666985" level="INFO">${row_count} = 4</msg>
+<var>${row_count}</var>
+<arg>css:table tbody tr[tabindex="0"]</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.660761" elapsed="0.006284"/>
+</kw>
+<if>
+<branch type="IF" condition="${row_count} == 0">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${lower_status}</var>
+<arg>"${expected_status}".lower()</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2026-11-23T11:31:24.667531" elapsed="0.000034"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<arg>No ${lower_status} cases right now.</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="NOT RUN" start="2026-11-23T11:31:24.667695" elapsed="0.000025"/>
+</kw>
+<status status="NOT RUN" start="2026-11-23T11:31:24.667211" elapsed="0.000550"/>
+</branch>
+<branch type="ELSE">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.679081" level="INFO">${row_status} = Resolved</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.668230" elapsed="0.010897"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.679299" elapsed="0.000396"/>
+</kw>
+<var name="${index}">1</var>
+<status status="PASS" start="2026-11-23T11:31:24.668089" elapsed="0.011661"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.690563" level="INFO">${row_status} = Resolved</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.679948" elapsed="0.010659"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.690774" elapsed="0.000384"/>
+</kw>
+<var name="${index}">2</var>
+<status status="PASS" start="2026-11-23T11:31:24.679855" elapsed="0.011360"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.700666" level="INFO">${row_status} = Resolved</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.691407" elapsed="0.009306"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.700884" elapsed="0.000391"/>
+</kw>
+<var name="${index}">3</var>
+<status status="PASS" start="2026-11-23T11:31:24.691318" elapsed="0.010010"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.710464" level="INFO">${row_status} = Resolved</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.701524" elapsed="0.008980"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.710663" elapsed="0.000379"/>
+</kw>
+<var name="${index}">4</var>
+<status status="PASS" start="2026-11-23T11:31:24.701433" elapsed="0.009660"/>
+</iter>
+<var>${index}</var>
+<value>1</value>
+<value>${row_count} + 1</value>
+<status status="PASS" start="2026-11-23T11:31:24.667865" elapsed="0.043274"/>
+</for>
+<status status="PASS" start="2026-11-23T11:31:24.667804" elapsed="0.043385"/>
+</branch>
+<status status="PASS" start="2026-11-23T11:31:24.667175" elapsed="0.044046"/>
+</if>
+<arg>Resolved</arg>
+<status status="PASS" start="2026-11-23T11:31:24.595597" elapsed="0.115670"/>
+</kw>
+<kw name="Verify Filtered Tab Shows Only Status">
+<kw name="Select Status Tab">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-23T11:31:24.712757" level="INFO">${tab} = xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Closed"]</msg>
+<var>${tab}</var>
+<arg>xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="${status_label}"]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.712385" elapsed="0.000417"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.713155" level="INFO">Clicking button 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Closed"]'.</msg>
+<arg>${tab}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.712960" elapsed="0.051494"/>
+</kw>
+<kw name="Element Attribute Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.773893" level="INFO">Element 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Closed"]' attribute 'aria-selected' contains value 'true'.</msg>
+<arg>${tab}</arg>
+<arg>aria-selected</arg>
+<arg>true</arg>
+<doc>Verifies element identified by ``locator`` contains expected attribute value.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.764695" elapsed="0.009354"/>
+</kw>
+<arg>${expected_status}</arg>
+<status status="PASS" start="2026-11-23T11:31:24.712079" elapsed="0.062113"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.780650" level="INFO">${row_count} = 7</msg>
+<var>${row_count}</var>
+<arg>css:table tbody tr[tabindex="0"]</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.774390" elapsed="0.006314"/>
+</kw>
+<if>
+<branch type="IF" condition="${row_count} == 0">
+<kw name="Evaluate" owner="BuiltIn">
+<var>${lower_status}</var>
+<arg>"${expected_status}".lower()</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2026-11-23T11:31:24.781067" elapsed="0.000028"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<arg>No ${lower_status} cases right now.</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="NOT RUN" start="2026-11-23T11:31:24.781190" elapsed="0.000021"/>
+</kw>
+<status status="NOT RUN" start="2026-11-23T11:31:24.780816" elapsed="0.000425"/>
+</branch>
+<branch type="ELSE">
+<for flavor="IN RANGE">
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.789556" level="INFO">${row_status} = Closed</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.781559" elapsed="0.008042"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.789773" elapsed="0.000482"/>
+</kw>
+<var name="${index}">1</var>
+<status status="PASS" start="2026-11-23T11:31:24.781485" elapsed="0.008850"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.798743" level="INFO">${row_status} = Closed</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.790585" elapsed="0.008200"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.798945" elapsed="0.000373"/>
+</kw>
+<var name="${index}">2</var>
+<status status="PASS" start="2026-11-23T11:31:24.790460" elapsed="0.008911"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.807637" level="INFO">${row_status} = Closed</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.799564" elapsed="0.008135"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.807925" elapsed="0.000547"/>
+</kw>
+<var name="${index}">3</var>
+<status status="PASS" start="2026-11-23T11:31:24.799474" elapsed="0.009078"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.816845" level="INFO">${row_status} = Closed</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.808836" elapsed="0.008052"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.817045" elapsed="0.000364"/>
+</kw>
+<var name="${index}">4</var>
+<status status="PASS" start="2026-11-23T11:31:24.808701" elapsed="0.008757"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.827283" level="INFO">${row_status} = Closed</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.817656" elapsed="0.009671"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.827489" elapsed="0.000374"/>
+</kw>
+<var name="${index}">5</var>
+<status status="PASS" start="2026-11-23T11:31:24.817565" elapsed="0.010351"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.836906" level="INFO">${row_status} = Closed</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.828119" elapsed="0.008840"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.837130" elapsed="0.000425"/>
+</kw>
+<var name="${index}">6</var>
+<status status="PASS" start="2026-11-23T11:31:24.828018" elapsed="0.009598"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:24.847188" level="INFO">${row_status} = Closed</msg>
+<var>${row_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:nth-child(${index}) td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.837832" elapsed="0.009400"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${row_status.strip()}</arg>
+<arg>${expected_status}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.847394" elapsed="0.000386"/>
+</kw>
+<var name="${index}">7</var>
+<status status="PASS" start="2026-11-23T11:31:24.837735" elapsed="0.010101"/>
+</iter>
+<var>${index}</var>
+<value>1</value>
+<value>${row_count} + 1</value>
+<status status="PASS" start="2026-11-23T11:31:24.781318" elapsed="0.066562"/>
+</for>
+<status status="PASS" start="2026-11-23T11:31:24.781274" elapsed="0.066657"/>
+</branch>
+<status status="PASS" start="2026-11-23T11:31:24.780795" elapsed="0.067167"/>
+</if>
+<arg>Closed</arg>
+<status status="PASS" start="2026-11-23T11:31:24.711634" elapsed="0.136372"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-23T11:31:24.848337" elapsed="2.107107"/>
+</kw>
+<tag>D03</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-23T11:31:22.806713" elapsed="4.148988"/>
+</test>
+<test id="s1-t4" name="TC-D03-04: Opening a case shows its matching status badge in the drawer header" line="61">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:26.957925" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-23T11:31:26.957618" elapsed="0.598026"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-23T11:31:27.555902" elapsed="0.022135"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-23T11:31:27.578352" elapsed="0.013976"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:26.957060" elapsed="0.635377"/>
+</kw>
+<kw name="Open Support Queue">
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:27.593734" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:27.593530" elapsed="0.081518"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:27.675477" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-23T11:31:27.691941" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:27.675238" elapsed="0.076981"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:27.752592" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:27.752388" elapsed="0.043332"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-23T11:31:27.593291" elapsed="0.202572"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:27.796082" elapsed="0.436617"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:27.593113" elapsed="0.639717"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:28.232964" elapsed="0.009316"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain" owner="SeleniumLibrary">
+<arg>Loading support tickets...</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` disappears from the current page.</doc>
+<status status="PASS" start="2026-11-23T11:31:28.242490" elapsed="0.213331"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:27.592837" elapsed="0.863135"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:28.469625" level="INFO">${table_status} = In Review</msg>
+<var>${table_status}</var>
+<arg>css:table tbody tr[tabindex="0"]:first-child td:nth-child(5)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:28.456281" elapsed="0.013439"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:28.470668" level="INFO">Clicking element 'css:table tbody tr[tabindex="0"]:first-child'.</msg>
+<arg>css:table tbody tr[tabindex="0"]:first-child</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:28.470260" elapsed="0.075317"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CASE_DRAWER}</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-23T11:31:28.545964" elapsed="0.010267"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:28.569317" level="INFO">Element 'xpath://aside[.//button[@aria-label="Close case panel"]]//header' contains text 'In Review'.</msg>
+<arg>${CASE_DRAWER}//header</arg>
+<arg>${table_status.strip()}</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-11-23T11:31:28.556590" elapsed="0.012822"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-23T11:31:28.569800" elapsed="2.106743"/>
+</kw>
+<tag>D03</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-23T11:31:26.956354" elapsed="3.720402"/>
+</test>
+<test id="s1-t5" name="TC-D03-05: Starting review transitions an Open case to In Review" line="69">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:30.678549" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-23T11:31:30.678260" elapsed="0.586449"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-23T11:31:31.264963" elapsed="0.019300"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-23T11:31:31.284510" elapsed="0.014526"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:30.677765" elapsed="0.621439"/>
+</kw>
+<kw name="Open Support Queue">
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:31.300977" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:31.300776" elapsed="0.090065"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:31.391525" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-23T11:31:31.413004" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:31.391140" elapsed="0.093268"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:31.485018" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:31.484675" elapsed="0.048641"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-23T11:31:31.300434" elapsed="0.233047"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:31.533638" elapsed="0.657641"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:31.300132" elapsed="0.891333"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.191663" elapsed="0.009134"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain" owner="SeleniumLibrary">
+<arg>Loading support tickets...</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` disappears from the current page.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.200980" elapsed="0.006144"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:31.299726" elapsed="0.907590"/>
+</kw>
+<kw name="Select Status Tab">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-23T11:31:32.211675" level="INFO">${tab} = xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Open"]</msg>
+<var>${tab}</var>
+<arg>xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="${status_label}"]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.207978" elapsed="0.003748"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:32.212026" level="INFO">Clicking button 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Open"]'.</msg>
+<arg>${tab}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.211852" elapsed="0.051918"/>
+</kw>
+<kw name="Element Attribute Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:32.275027" level="INFO">Element 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Open"]' attribute 'aria-selected' contains value 'true'.</msg>
+<arg>${tab}</arg>
+<arg>aria-selected</arg>
+<arg>true</arg>
+<doc>Verifies element identified by ``locator`` contains expected attribute value.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.263952" elapsed="0.011164"/>
+</kw>
+<arg>Open</arg>
+<status status="PASS" start="2026-11-23T11:31:32.207663" elapsed="0.067552"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:32.281774" level="INFO">${open_count} = 21</msg>
+<var>${open_count}</var>
+<arg>css:table tbody tr[tabindex="0"]</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.275562" elapsed="0.006253"/>
+</kw>
+<kw name="Skip If" owner="BuiltIn">
+<arg>${open_count} == 0</arg>
+<arg>No Open cases available in test database to transition.</arg>
+<doc>Conditionally stops the current test or task and sets its status to SKIP.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.282218" elapsed="0.000599"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:32.293622" level="INFO">${case_code} = TKT-1020-20261123</msg>
+<var>${case_code}</var>
+<arg>css:table tbody tr[tabindex="0"]:first-child td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.283105" elapsed="0.010561"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:32.294202" level="INFO">Clicking element 'css:table tbody tr[tabindex="0"]:first-child'.</msg>
+<arg>css:table tbody tr[tabindex="0"]:first-child</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.293962" elapsed="0.058106"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CASE_DRAWER}</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.352446" elapsed="0.011852"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:32.377842" level="INFO">Element 'xpath://aside[.//button[@aria-label="Close case panel"]]//header' contains text 'Open'.</msg>
+<arg>${CASE_DRAWER}//header</arg>
+<arg>Open</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.364749" elapsed="0.013226"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:32.378684" level="INFO">Clicking button 'xpath://aside//footer//button[normalize-space()="Start review"]'.</msg>
+<arg>xpath://aside//footer//button[normalize-space()="Start review"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.378438" elapsed="0.053620"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>${CASE_DRAWER}//header</arg>
+<arg>In Review</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:32.432380" elapsed="0.852896"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:33.285840" level="INFO">Clicking button 'xpath://aside//button[@aria-label="Close case panel"]'.</msg>
+<arg>xpath://aside//button[@aria-label="Close case panel"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:33.285602" elapsed="0.049884"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" owner="SeleniumLibrary">
+<arg>${CASE_DRAWER}</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` disappears from the current page.</doc>
+<status status="PASS" start="2026-11-23T11:31:33.335856" elapsed="0.004633"/>
+</kw>
+<kw name="Select Status Tab">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-23T11:31:33.341726" level="INFO">${tab} = xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="In Review"]</msg>
+<var>${tab}</var>
+<arg>xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="${status_label}"]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-23T11:31:33.341230" elapsed="0.000540"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:33.342220" level="INFO">Clicking button 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="In Review"]'.</msg>
+<arg>${tab}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:33.341919" elapsed="0.050511"/>
+</kw>
+<kw name="Element Attribute Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:33.400469" level="INFO">Element 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="In Review"]' attribute 'aria-selected' contains value 'true'.</msg>
+<arg>${tab}</arg>
+<arg>aria-selected</arg>
+<arg>true</arg>
+<doc>Verifies element identified by ``locator`` contains expected attribute value.</doc>
+<status status="PASS" start="2026-11-23T11:31:33.392602" elapsed="0.007988"/>
+</kw>
+<arg>In Review</arg>
+<status status="PASS" start="2026-11-23T11:31:33.340886" elapsed="0.059836"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:33.409885" level="INFO">Current page contains text 'TKT-1020-20261123'.</msg>
+<arg>${case_code.strip()}</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:33.401062" elapsed="0.008913"/>
+</kw>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-23T11:31:33.410358" elapsed="2.107361"/>
+</kw>
+<tag>D03</tag>
+<tag>mutates-data</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-23T11:31:30.677311" elapsed="4.840582"/>
+</test>
+<test id="s1-t6" name="TC-D03-06: Top status counters match the filtered row counts for each status" line="86">
+<kw name="Open Login Page" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:35.519817" level="INFO">Opening browser 'headlesschrome' to base url 'http://localhost:5173'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-23T11:31:35.519650" elapsed="0.641170"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1280</arg>
+<arg>900</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2026-11-23T11:31:36.161342" elapsed="0.027458"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:button[type="submit"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-23T11:31:36.189068" elapsed="0.012751"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:35.519273" elapsed="0.682695"/>
+</kw>
+<kw name="Open Support Queue">
+<kw name="Log In As Valid Admin" owner="common">
+<kw name="Log In With" owner="common">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:36.203871" level="INFO">Typing text 'jarvis_wuckert' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:36.203363" elapsed="0.089897"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:36.293859" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2026-11-23T11:31:36.311173" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:36.293510" elapsed="0.082425"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:36.376500" level="INFO">Clicking button 'css:button[type="submit"]'.</msg>
+<arg>css:button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:36.376182" elapsed="0.045640"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASS}</arg>
+<status status="PASS" start="2026-11-23T11:31:36.202942" elapsed="0.219015"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:36.422139" elapsed="0.831451"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:36.202672" elapsed="1.051029"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:header h1</arg>
+<arg>Support cases</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.253829" elapsed="0.007636"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain" owner="SeleniumLibrary">
+<arg>Loading support tickets...</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until ``text`` disappears from the current page.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.261674" elapsed="0.242465"/>
+</kw>
+<status status="PASS" start="2026-11-23T11:31:36.202366" elapsed="1.301884"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.517196" level="INFO">${counter_text} = 20</msg>
+<var>${counter_text}</var>
+<arg>xpath://p[normalize-space()="${status}"]/following-sibling::p[1]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.504882" elapsed="0.012359"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2026-11-23T11:31:37.517937" level="INFO">${expected_count} = 20</msg>
+<var>${expected_count}</var>
+<arg>${counter_text.strip()}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.517421" elapsed="0.000547"/>
+</kw>
+<kw name="Select Status Tab">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-23T11:31:37.518647" level="INFO">${tab} = xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Open"]</msg>
+<var>${tab}</var>
+<arg>xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="${status_label}"]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.518355" elapsed="0.000323"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.518953" level="INFO">Clicking button 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Open"]'.</msg>
+<arg>${tab}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.518782" elapsed="0.053298"/>
+</kw>
+<kw name="Element Attribute Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.581603" level="INFO">Element 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Open"]' attribute 'aria-selected' contains value 'true'.</msg>
+<arg>${tab}</arg>
+<arg>aria-selected</arg>
+<arg>true</arg>
+<doc>Verifies element identified by ``locator`` contains expected attribute value.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.572265" elapsed="0.009471"/>
+</kw>
+<arg>${status}</arg>
+<status status="PASS" start="2026-11-23T11:31:37.518126" elapsed="0.063745"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.588937" level="INFO">${actual_rows} = 20</msg>
+<var>${actual_rows}</var>
+<arg>css:table tbody tr[tabindex="0"]</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.582043" elapsed="0.006941"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${actual_rows}</arg>
+<arg>${expected_count}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.589186" elapsed="0.000366"/>
+</kw>
+<var name="${status}">Open</var>
+<status status="PASS" start="2026-11-23T11:31:37.504720" elapsed="0.084890"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.603231" level="INFO">${counter_text} = 9</msg>
+<var>${counter_text}</var>
+<arg>xpath://p[normalize-space()="${status}"]/following-sibling::p[1]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.589867" elapsed="0.013409"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2026-11-23T11:31:37.603882" level="INFO">${expected_count} = 9</msg>
+<var>${expected_count}</var>
+<arg>${counter_text.strip()}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.603458" elapsed="0.000455"/>
+</kw>
+<kw name="Select Status Tab">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-23T11:31:37.604512" level="INFO">${tab} = xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="In Review"]</msg>
+<var>${tab}</var>
+<arg>xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="${status_label}"]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.604278" elapsed="0.000258"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.604786" level="INFO">Clicking button 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="In Review"]'.</msg>
+<arg>${tab}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.604627" elapsed="0.046375"/>
+</kw>
+<kw name="Element Attribute Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.659964" level="INFO">Element 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="In Review"]' attribute 'aria-selected' contains value 'true'.</msg>
+<arg>${tab}</arg>
+<arg>aria-selected</arg>
+<arg>true</arg>
+<doc>Verifies element identified by ``locator`` contains expected attribute value.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.651180" elapsed="0.008877"/>
+</kw>
+<arg>${status}</arg>
+<status status="PASS" start="2026-11-23T11:31:37.604059" elapsed="0.056087"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.664066" level="INFO">${actual_rows} = 9</msg>
+<var>${actual_rows}</var>
+<arg>css:table tbody tr[tabindex="0"]</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.660274" elapsed="0.003831"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${actual_rows}</arg>
+<arg>${expected_count}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.664297" elapsed="0.000319"/>
+</kw>
+<var name="${status}">In Review</var>
+<status status="PASS" start="2026-11-23T11:31:37.589755" elapsed="0.074923"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.674253" level="INFO">${counter_text} = 4</msg>
+<var>${counter_text}</var>
+<arg>xpath://p[normalize-space()="${status}"]/following-sibling::p[1]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.664868" elapsed="0.009429"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2026-11-23T11:31:37.674851" level="INFO">${expected_count} = 4</msg>
+<var>${expected_count}</var>
+<arg>${counter_text.strip()}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.674464" elapsed="0.000415"/>
+</kw>
+<kw name="Select Status Tab">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-23T11:31:37.675457" level="INFO">${tab} = xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Resolved"]</msg>
+<var>${tab}</var>
+<arg>xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="${status_label}"]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.675238" elapsed="0.000241"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.675754" level="INFO">Clicking button 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Resolved"]'.</msg>
+<arg>${tab}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.675589" elapsed="0.062419"/>
+</kw>
+<kw name="Element Attribute Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.757379" level="INFO">Element 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Resolved"]' attribute 'aria-selected' contains value 'true'.</msg>
+<arg>${tab}</arg>
+<arg>aria-selected</arg>
+<arg>true</arg>
+<doc>Verifies element identified by ``locator`` contains expected attribute value.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.738543" elapsed="0.018937"/>
+</kw>
+<arg>${status}</arg>
+<status status="PASS" start="2026-11-23T11:31:37.675020" elapsed="0.082557"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.764899" level="INFO">${actual_rows} = 4</msg>
+<var>${actual_rows}</var>
+<arg>css:table tbody tr[tabindex="0"]</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.757709" elapsed="0.007258"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${actual_rows}</arg>
+<arg>${expected_count}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.765232" elapsed="0.000532"/>
+</kw>
+<var name="${status}">Resolved</var>
+<status status="PASS" start="2026-11-23T11:31:37.664787" elapsed="0.101080"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.782796" level="INFO">${counter_text} = 7</msg>
+<var>${counter_text}</var>
+<arg>xpath://p[normalize-space()="${status}"]/following-sibling::p[1]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.766248" elapsed="0.016619"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2026-11-23T11:31:37.783914" level="INFO">${expected_count} = 7</msg>
+<var>${expected_count}</var>
+<arg>${counter_text.strip()}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.783165" elapsed="0.000804"/>
+</kw>
+<kw name="Select Status Tab">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-23T11:31:37.784935" level="INFO">${tab} = xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Closed"]</msg>
+<var>${tab}</var>
+<arg>xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="${status_label}"]</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.784613" elapsed="0.000352"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.785293" level="INFO">Clicking button 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Closed"]'.</msg>
+<arg>${tab}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.785081" elapsed="0.062300"/>
+</kw>
+<kw name="Element Attribute Value Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.856411" level="INFO">Element 'xpath://div[@role="tablist"]//button[@role="tab" and normalize-space()="Closed"]' attribute 'aria-selected' contains value 'true'.</msg>
+<arg>${tab}</arg>
+<arg>aria-selected</arg>
+<arg>true</arg>
+<doc>Verifies element identified by ``locator`` contains expected attribute value.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.847580" elapsed="0.008934"/>
+</kw>
+<arg>${status}</arg>
+<status status="PASS" start="2026-11-23T11:31:37.784269" elapsed="0.072345"/>
+</kw>
+<kw name="Get Element Count" owner="SeleniumLibrary">
+<msg time="2026-11-23T11:31:37.861962" level="INFO">${actual_rows} = 7</msg>
+<var>${actual_rows}</var>
+<arg>css:table tbody tr[tabindex="0"]</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.856760" elapsed="0.005248"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${actual_rows}</arg>
+<arg>${expected_count}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.862210" elapsed="0.000321"/>
+</kw>
+<var name="${status}">Closed</var>
+<status status="PASS" start="2026-11-23T11:31:37.766078" elapsed="0.096513"/>
+</iter>
+<var>${status}</var>
+<value>@{VALID_STATUSES}</value>
+<status status="PASS" start="2026-11-23T11:31:37.504449" elapsed="0.358190"/>
+</for>
+<kw name="Close All Browsers" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-23T11:31:37.863071" elapsed="2.129268"/>
+</kw>
+<tag>D03</tag>
+<tag>positive</tag>
+<status status="PASS" start="2026-11-23T11:31:35.518430" elapsed="4.474092"/>
+</test>
+<status status="PASS" start="2026-11-23T11:31:13.063290" elapsed="26.929804"/>
+</suite>
+<statistics>
+<total>
+<stat pass="6" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="6" fail="0" skip="0">D03</stat>
+<stat pass="1" fail="0" skip="0">mutates-data</stat>
+<stat pass="6" fail="0" skip="0">positive</stat>
+</tag>
+<suite>
+<stat name="D03 case status" id="s1" pass="6" fail="0" skip="0">D03 case status</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
