@@ -55,8 +55,11 @@ function formatRowTicket (row) {
         .filter(Boolean)
         .join(' ');
 
-    const condoName = row.booking?.address?.condo?.name;
-    const unitDetails = [row.booking?.address?.tower, row.booking?.address?.unit_number]
+    const address = Array.isArray(row.booking?.address)
+        ? row.booking.address[0]
+        : row.booking?.address;
+    const condoName = address?.condo?.name;
+    const unitDetails = [address?.tower, address?.unit_number]
         .filter(Boolean)
         .join(' ');
 
@@ -102,7 +105,7 @@ export async function fetchCases() {
             aide:aide_aides(*),
             booking:usr_bookings(
                 *,
-                address:usr_resident_addresses(
+                address:usr_resident_addresses!usr_bookings_address_fk(
                     tower,
                     unit_number,
                     condo:usr_condominiums(name)
