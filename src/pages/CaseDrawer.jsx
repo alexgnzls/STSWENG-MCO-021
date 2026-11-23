@@ -191,7 +191,7 @@ export default function CaseDrawer({ caseSelected, onPatch, onClose }) {
                 <header className="flex items-start justify-between border-b border-ink/10 p-5">
                     <div>
                         <div className="flex items-center gap-2">
-                            <h2 className="text-lg font-semibold">{caseSelected.id.slice(0, 8)}</h2>
+                            <h2 className="text-lg font-semibold">{caseSelected.code}</h2>
                             <Badge value={caseSelected.status} />
                         </div>
 
