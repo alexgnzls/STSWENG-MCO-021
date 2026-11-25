@@ -128,9 +128,9 @@ export default function PayrollDetails({
                                         <td className={TD}>{peso(gross)}</td>
                                         <td className={`${TD} text-ink/70`}>
                                             {signed(-commission)}
-                                            <span>({Math.round(rate * 100)}%)</span>
+                                            <span>({Math.round(commission_rate * 100)}%)</span>
                                         </td>
-                                        <td className={TD}>{signed(adjustment)}</td>
+                                        <td className={TD}>{signed(adjustment_fee)}</td>
                                         <td className={`${TD} font-semibold`}>{peso(payout)}</td>
                                         <td className={TD}>
                                             <Badge value={d.processed_date ? 'Processed' : 'Pending'} />
